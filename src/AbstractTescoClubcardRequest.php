@@ -1,10 +1,10 @@
 <?php
 
-namespace DigiTickets\Integration\TescoClubcard\Api\Requests;
+namespace DigiTickets\TescoClubcard\Requests;
 
-use DigiTickets\Integration\TescoClubcard\Api\Responses\Interfaces\RedeemResponseInterface;
-use DigiTickets\Integration\TescoClubcard\Api\Responses\Interfaces\UnredeemResponseInterface;
-use DigiTickets\Integration\TescoClubcard\Api\Responses\Interfaces\ValidateResponseInterface;
+use DigiTickets\TescoClubcard\Responses\Interfaces\RedeemResponseInterface;
+use DigiTickets\TescoClubcard\Responses\Interfaces\UnredeemResponseInterface;
+use DigiTickets\TescoClubcard\Responses\Interfaces\ValidateResponseInterface;
 
 abstract class AbstractTescoClubcardRequest
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace DigiTickets\Integration\TescoClubcard\Api\Responses\Interfaces;
+namespace DigiTickets\TescoClubcard\Responses\Interfaces;
 
 interface UnredeemResponseInterface extends AbstractResponseInterface
 {

@@ -1,15 +1,15 @@
 <?php
 
-namespace DigiTickets\Integration\TescoClubcard\Api\Requests;
+namespace DigiTickets\TescoClubcard\Requests;
 
-use DigiTickets\Integration\TescoClubcard\Api\Messages\AbstractMessage;
-use DigiTickets\Integration\TescoClubcard\Api\Messages\ValidateMessage;
-use DigiTickets\Integration\TescoClubcard\Api\Responses\Interfaces\RedeemResponseInterface;
-use DigiTickets\Integration\TescoClubcard\Api\Responses\Interfaces\UnredeemResponseInterface;
-use DigiTickets\Integration\TescoClubcard\Api\Responses\Interfaces\ValidateResponseInterface;
-use DigiTickets\Integration\TescoClubcard\Api\Responses\Rewards\RedeemResponse;
-use DigiTickets\Integration\TescoClubcard\Api\Responses\Rewards\UnredeemResponse;
-use DigiTickets\Integration\TescoClubcard\Api\Responses\Rewards\ValidateResponse;
+use DigiTickets\TescoClubcard\Messages\AbstractMessage;
+use DigiTickets\TescoClubcard\Messages\ValidateMessage;
+use DigiTickets\TescoClubcard\Responses\Interfaces\RedeemResponseInterface;
+use DigiTickets\TescoClubcard\Responses\Interfaces\UnredeemResponseInterface;
+use DigiTickets\TescoClubcard\Responses\Interfaces\ValidateResponseInterface;
+use DigiTickets\TescoClubcard\Responses\Rewards\RedeemResponse;
+use DigiTickets\TescoClubcard\Responses\Rewards\UnredeemResponse;
+use DigiTickets\TescoClubcard\Responses\Rewards\ValidateResponse;
 use GuzzleHttp\Client;
 
 class TescoClubcardRewardsRequest extends AbstractTescoClubcardRequest

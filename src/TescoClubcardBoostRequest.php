@@ -1,17 +1,17 @@
 <?php
 
-namespace DigiTickets\Integration\TescoClubcard\Api\Requests;
+namespace DigiTickets\TescoClubcard\Requests;
 
-use DigiTickets\Integration\TescoClubcard\Api\Messages\AbstractMessage;
-use DigiTickets\Integration\TescoClubcard\Api\Messages\RedeemMessage;
-use DigiTickets\Integration\TescoClubcard\Api\Messages\UnredeemMessage;
-use DigiTickets\Integration\TescoClubcard\Api\Messages\ValidateMessage;
-use DigiTickets\Integration\TescoClubcard\Api\Responses\Boost\RedeemResponse;
-use DigiTickets\Integration\TescoClubcard\Api\Responses\Boost\UnredeemResponse;
-use DigiTickets\Integration\TescoClubcard\Api\Responses\Boost\ValidateResponse;
-use DigiTickets\Integration\TescoClubcard\Api\Responses\Interfaces\RedeemResponseInterface;
-use DigiTickets\Integration\TescoClubcard\Api\Responses\Interfaces\UnredeemResponseInterface;
-use DigiTickets\Integration\TescoClubcard\Api\Responses\Interfaces\ValidateResponseInterface;
+use DigiTickets\TescoClubcard\Messages\AbstractMessage;
+use DigiTickets\TescoClubcard\Messages\RedeemMessage;
+use DigiTickets\TescoClubcard\Messages\UnredeemMessage;
+use DigiTickets\TescoClubcard\Messages\ValidateMessage;
+use DigiTickets\TescoClubcard\Responses\Boost\RedeemResponse;
+use DigiTickets\TescoClubcard\Responses\Boost\UnredeemResponse;
+use DigiTickets\TescoClubcard\Responses\Boost\ValidateResponse;
+use DigiTickets\TescoClubcard\Responses\Interfaces\RedeemResponseInterface;
+use DigiTickets\TescoClubcard\Responses\Interfaces\UnredeemResponseInterface;
+use DigiTickets\TescoClubcard\Responses\Interfaces\ValidateResponseInterface;
 use SoapClient;
 use SoapVar;
 

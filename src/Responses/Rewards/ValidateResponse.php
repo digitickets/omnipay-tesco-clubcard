@@ -1,8 +1,8 @@
 <?php
 
-namespace DigiTickets\Integration\TescoClubcard\Api\Responses\Rewards;
+namespace DigiTickets\TescoClubcard\Responses\Rewards;
 
-use DigiTickets\Integration\TescoClubcard\Api\Responses\Interfaces\ValidateResponseInterface;
+use DigiTickets\TescoClubcard\Responses\Interfaces\ValidateResponseInterface;
 
 class ValidateResponse extends AbstractResponse implements ValidateResponseInterface
 {

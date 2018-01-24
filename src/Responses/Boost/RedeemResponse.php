@@ -1,8 +1,8 @@
 <?php
 
-namespace DigiTickets\Integration\TescoClubcard\Api\Responses\Boost;
+namespace DigiTickets\TescoClubcard\Responses\Boost;
 
-use DigiTickets\Integration\TescoClubcard\Api\Responses\Interfaces\RedeemResponseInterface;
+use DigiTickets\TescoClubcard\Responses\Interfaces\RedeemResponseInterface;
 
 class RedeemResponse extends AbstractResponse implements RedeemResponseInterface
 {

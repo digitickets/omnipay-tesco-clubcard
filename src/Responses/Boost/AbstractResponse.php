@@ -1,6 +1,6 @@
 <?php
 
-namespace DigiTickets\Integration\TescoClubcard\Api\Responses\Boost;
+namespace DigiTickets\TescoClubcard\Responses\Boost;
 
 abstract class AbstractResponse
 {

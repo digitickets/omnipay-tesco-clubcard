@@ -1,6 +1,6 @@
 <?php
 
-namespace DigiTickets\Integration\TescoClubcard\Api\Messages;
+namespace DigiTickets\TescoClubcard\Messages;
 
 class AbstractMessage
 {
