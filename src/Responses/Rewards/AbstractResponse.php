@@ -46,7 +46,11 @@ abstract class AbstractResponse
         error_log('Response is valid? '.var_export($this->responseIsValid, true));
     }
 
-    private function getTokenAttribute(string $attribute)
+    /**
+     * @param string $attribute
+     * @return null
+     */
+    private function getTokenAttribute($attribute)
     {
         if (property_exists($this->tokenDetails, $attribute)) {
             return $this->tokenDetails->$attribute;
@@ -55,9 +59,15 @@ abstract class AbstractResponse
         return null;
     }
 
-    abstract protected function getSuccessStatusCode(): string;
+    /**
+     * @return string
+     */
+    abstract protected function getSuccessStatusCode();
 
-    public function success(): bool
+    /**
+     * @return bool
+     */
+    public function success()
     {
         return $this->responseIsValid && $this->getTokenAttribute('TokenStatus') == $this->getSuccessStatusCode();
     }

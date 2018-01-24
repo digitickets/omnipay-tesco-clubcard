@@ -52,7 +52,11 @@ abstract class AbstractResponse
         }
     }
 
-    protected function get(string $attribute): string
+    /**
+     * @param string $attribute
+     * @return string
+     */
+    protected function get($attribute)
     {
         if (property_exists($this->responseNode, $attribute)) {
             return (string) $this->responseNode->$attribute;
@@ -66,9 +70,12 @@ abstract class AbstractResponse
      *
      * @return string
      */
-    abstract protected function getSuccessStatusCode(): string;
+    abstract protected function getSuccessStatusCode();
 
-    public function success(): bool
+    /**
+     * @return bool
+     */
+    public function success()
     {
         return $this->responseIsValid && $this->get('Status') == $this->getSuccessStatusCode();
     }

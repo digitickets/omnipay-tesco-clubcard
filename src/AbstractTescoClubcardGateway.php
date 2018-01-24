@@ -6,7 +6,7 @@ use DigiTickets\TescoClubcard\Responses\Interfaces\RedeemResponseInterface;
 use DigiTickets\TescoClubcard\Responses\Interfaces\UnredeemResponseInterface;
 use DigiTickets\TescoClubcard\Responses\Interfaces\ValidateResponseInterface;
 
-abstract class AbstractTescoClubcardRequest
+abstract class AbstractTescoClubcardGateway
 {
     /**
      * @var string
@@ -25,7 +25,10 @@ abstract class AbstractTescoClubcardRequest
      */
     private $appKey;
 
-    abstract public function getUrl(): string;
+    /**
+     * @return string
+     */
+    abstract public function getUrl();
 
     /**
      * Initialise the request with parameters.
@@ -34,7 +37,7 @@ abstract class AbstractTescoClubcardRequest
      *
      * @param array $parameters An associative array of parameters
      *
-     * @return AbstractTescoClubcardRequest
+     * @return AbstractTescoClubcardGateway
      */
     public function initialise($parameters = null)
     {
@@ -66,48 +69,72 @@ abstract class AbstractTescoClubcardRequest
         return $uuid;
     }
 
-    protected function setSupplierCode(string $supplierCode)
+    /**
+     * @param string $supplierCode
+     */
+    protected function setSupplierCode($supplierCode)
     {
         error_log('setSupplierCode: '.$supplierCode);
         $this->supplierCode = $supplierCode;
     }
 
-    public function getSupplierCode(): string
+    /**
+     * @return string
+     */
+    public function getSupplierCode()
     {
         error_log('getSupplierCode: '.$this->supplierCode);
 
         return $this->supplierCode;
     }
 
-    protected function setThirdPartyIdentifier(string $thirdPartyIdentifier)
+    /**
+     * @param string $thirdPartyIdentifier
+     */
+    protected function setThirdPartyIdentifier($thirdPartyIdentifier)
     {
         error_log('setThirdPartyIdentifier: '.$thirdPartyIdentifier);
         $this->thirdPartyIdentifier = $thirdPartyIdentifier;
     }
 
-    public function getThirdPartyIdentifier(): string
+    /**
+     * @return string
+     */
+    public function getThirdPartyIdentifier()
     {
         error_log('getThirdPartyIdentifier: '.$this->thirdPartyIdentifier);
 
         return $this->thirdPartyIdentifier;
     }
 
-    public function getAppKeyToken(): string
+    /**
+     * @return string
+     */
+    public function getAppKeyToken()
     {
         return $this->appKeyToken;
     }
 
-    public function setAppKeyToken(string $appKeyToken)
+    /**
+     * @param string $appKeyToken
+     */
+    public function setAppKeyToken($appKeyToken)
     {
         $this->appKeyToken = $appKeyToken;
     }
 
-    public function getAppKey(): string
+    /**
+     * @return string
+     */
+    public function getAppKey()
     {
         return $this->appKey;
     }
 
-    public function setAppKey(string $appKey)
+    /**
+     * @param string $appKey
+     */
+    public function setAppKey($appKey)
     {
         $this->appKey = $appKey;
     }
@@ -122,11 +149,23 @@ abstract class AbstractTescoClubcardRequest
         return $this->generateGuid();
     }
 
-    abstract public function validate(string $voucherNumber): ValidateResponseInterface;
+    /**
+     * @param string $voucherNumber
+     * @return ValidateResponseInterface
+     */
+    abstract public function validate($voucherNumber);
 
-    abstract public function redeem(string $voucherNumber): RedeemResponseInterface;
+    /**
+     * @param string $voucherNumber
+     * @return RedeemResponseInterface
+     */
+    abstract public function redeem($voucherNumber);
 
-    abstract public function unredeem(string $voucherNumber): UnredeemResponseInterface;
+    /**
+     * @param string $voucherNumber
+     * @return UnredeemResponseInterface
+     */
+    abstract public function unredeem($voucherNumber);
 
     // @TODO: Do "cancel" and "add reference" at some point.
 }

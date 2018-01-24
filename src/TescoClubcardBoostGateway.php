@@ -15,14 +15,21 @@ use DigiTickets\TescoClubcard\Responses\Interfaces\ValidateResponseInterface;
 use SoapClient;
 use SoapVar;
 
-class TescoClubcardBoostRequest extends AbstractTescoClubcardRequest
+class TescoClubcardBoostGateway extends AbstractTescoClubcardGateway
 {
-    public function getUrl(): string
+    /**
+     * @return string
+     */
+    public function getUrl()
     {
         return 'https://tfoag01.tescofreetime.com/TokenAuthorisationWebService/TokenAuthorise.asmx';
     }
 
-    private function send(AbstractMessage $message): \SimpleXMLElement
+    /**
+     * @param AbstractMessage $message
+     * @return \SimpleXMLElement
+     */
+    private function send(AbstractMessage $message)
     {
         error_log('Send...');
         // @TODO: do all the substitutions - date/time, supplier codes, etc.
@@ -100,7 +107,11 @@ EOT;
         return $this->generateGuid();
     }
 
-    public function validate(string $voucherNumber): ValidateResponseInterface
+    /**
+     * @param string $voucherNumber
+     * @return ValidateResponseInterface
+     */
+    public function validate($voucherNumber)
     {
         error_log('/');
         error_log('validate voucher (Boost): '.$voucherNumber);
@@ -110,7 +121,11 @@ EOT;
         return new ValidateResponse($this->send($message));
     }
 
-    public function redeem(string $voucherNumber): RedeemResponseInterface
+    /**
+     * @param string $voucherNumber
+     * @return RedeemResponseInterface
+     */
+    public function redeem($voucherNumber)
     {
         error_log('/');
         error_log('validate voucher (Boost): '.$voucherNumber);
@@ -120,7 +135,11 @@ EOT;
         return new RedeemResponse($this->send($message));
     }
 
-    public function unredeem(string $voucherNumber): UnredeemResponseInterface
+    /**
+     * @param string $voucherNumber
+     * @return UnredeemResponseInterface
+     */
+    public function unredeem($voucherNumber)
     {
         error_log('/');
         error_log('validate voucher (Boost): '.$voucherNumber);

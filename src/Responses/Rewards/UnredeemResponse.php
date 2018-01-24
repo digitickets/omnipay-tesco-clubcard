@@ -6,12 +6,18 @@ use DigiTickets\TescoClubcard\Responses\Interfaces\UnredeemResponseInterface;
 
 class UnredeemResponse extends AbstractResponse implements UnredeemResponseInterface
 {
-    protected function getSuccessStatusCode(): string
+    /**
+     * @return string
+     */
+    protected function getSuccessStatusCode()
     {
         return ''; // @TODO: Finish this.
     }
 
-    public function success(): bool
+    /**
+     * @return bool
+     */
+    public function success()
     {
         return false; // @TODO: Needs finishing
     }

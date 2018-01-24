@@ -12,9 +12,12 @@ use DigiTickets\TescoClubcard\Responses\Rewards\UnredeemResponse;
 use DigiTickets\TescoClubcard\Responses\Rewards\ValidateResponse;
 use GuzzleHttp\Client;
 
-class TescoClubcardRewardsRequest extends AbstractTescoClubcardRequest
+class TescoClubcardRewardsGateway extends AbstractTescoClubcardGateway
 {
-    public function getUrl(): string
+    /**
+     * @return string
+     */
+    public function getUrl()
     {
         return 'https://clubcard.api.tesco.com/v1.0/TokenProcessorService/';
     }
@@ -24,7 +27,11 @@ class TescoClubcardRewardsRequest extends AbstractTescoClubcardRequest
         return 'appKeyToken='.$this->getAppKeyToken().'&appKey='.$this->getAppKey();
     }
 
-    private function send(AbstractMessage $message): \stdClass
+    /**
+     * @param AbstractMessage $message
+     * @return \stdClass
+     */
+    private function send(AbstractMessage $message)
     {
         error_log('Sending a Reward request');
         // Need to substitute all the things in.
@@ -78,7 +85,11 @@ class TescoClubcardRewardsRequest extends AbstractTescoClubcardRequest
         return 'NOIDEA'; // No idea what this is supposed to be.
     }
 
-    public function validate(string $voucherNumber): ValidateResponseInterface
+    /**
+     * @param string $voucherNumber
+     * @return ValidateResponseInterface
+     */
+    public function validate($voucherNumber)
     {
         error_log('/');
         error_log('validate voucher (Rewards): '.$voucherNumber);
@@ -87,12 +98,20 @@ class TescoClubcardRewardsRequest extends AbstractTescoClubcardRequest
         return new ValidateResponse($this->send($message));
     }
 
-    public function redeem(string $voucherNumber): RedeemResponseInterface
+    /**
+     * @param string $voucherNumber
+     * @return RedeemResponseInterface
+     */
+    public function redeem($voucherNumber)
     {
         return new RedeemResponse(json_decode('{"dummy":"true"}'));
     }
 
-    public function unredeem(string $voucherNumber): UnredeemResponseInterface
+    /**
+     * @param string $voucherNumber
+     * @return UnredeemResponseInterface
+     */
+    public function unredeem($voucherNumber)
     {
         return new UnredeemResponse(json_decode('{"dummy":"true"}'));
     }

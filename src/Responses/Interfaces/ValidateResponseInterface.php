@@ -4,5 +4,8 @@ namespace DigiTickets\TescoClubcard\Responses\Interfaces;
 
 interface ValidateResponseInterface extends AbstractResponseInterface
 {
-    public function getValue(): float;
+    /**
+     * @return float
+     */
+    public function getValue();
 }

@@ -6,7 +6,10 @@ use DigiTickets\TescoClubcard\Responses\Interfaces\ValidateResponseInterface;
 
 class ValidateResponse extends AbstractResponse implements ValidateResponseInterface
 {
-    protected function getSuccessStatusCode(): string
+    /**
+     * @return string
+     */
+    protected function getSuccessStatusCode()
     {
         return self::STATUS_ACTIVE;
     }
@@ -20,12 +23,15 @@ class ValidateResponse extends AbstractResponse implements ValidateResponseInter
         $map = [
             'NotFound' => 'Voucher was not found',
         ];
-        $error = $map[$this->get('Status')] ?? 'Unknown error [Boost ValidateResponse]';
+        $error = isset($map[$this->get('Status')]) ? $map[$this->get('Status')] : 'Unknown error [Boost ValidateResponse]';
 
         return $error;
     }
 
-    public function getValue(): float
+    /**
+     * @return float
+     */
+    public function getValue()
     {
         return ((int) $this->get('ValueString')) / 100;
     }

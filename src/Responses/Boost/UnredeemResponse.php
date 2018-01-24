@@ -6,7 +6,10 @@ use DigiTickets\TescoClubcard\Responses\Interfaces\UnredeemResponseInterface;
 
 class UnredeemResponse extends AbstractResponse implements UnredeemResponseInterface
 {
-    protected function getSuccessStatusCode(): string
+    /**
+     * @return string
+     */
+    protected function getSuccessStatusCode()
     {
         return self::STATUS_ACTIVE;
     }

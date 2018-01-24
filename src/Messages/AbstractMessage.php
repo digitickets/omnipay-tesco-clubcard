@@ -11,17 +11,27 @@ class AbstractMessage
      */
     private $voucherNumber;
 
-    public function __construct(string $voucherNumber)
+    /**
+     * AbstractMessage constructor.
+     * @param string $voucherNumber
+     */
+    public function __construct($voucherNumber)
     {
         $this->voucherNumber = $voucherNumber;
     }
 
-    public function getVoucherNumber(): string
+    /**
+     * @return string
+     */
+    public function getVoucherNumber()
     {
         return $this->voucherNumber;
     }
 
-    public function getRequestType(): string
+    /**
+     * @return string
+     */
+    public function getRequestType()
     {
         assert(static::REQUEST_TYPE != self::REQUEST_TYPE, 'Request type must be specified in the subclass');
 

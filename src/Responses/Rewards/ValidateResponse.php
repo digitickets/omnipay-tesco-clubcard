@@ -6,7 +6,10 @@ use DigiTickets\TescoClubcard\Responses\Interfaces\ValidateResponseInterface;
 
 class ValidateResponse extends AbstractResponse implements ValidateResponseInterface
 {
-    protected function getSuccessStatusCode(): string
+    /**
+     * @return string
+     */
+    protected function getSuccessStatusCode()
     {
         return self::STATUS_ACTIVE;
     }
@@ -20,7 +23,10 @@ class ValidateResponse extends AbstractResponse implements ValidateResponseInter
         return 'TBC';
     }
 
-    public function getValue(): float
+    /**
+     * @return float
+     */
+    public function getValue()
     {
         // @TODO: Finish this.
         return -999;

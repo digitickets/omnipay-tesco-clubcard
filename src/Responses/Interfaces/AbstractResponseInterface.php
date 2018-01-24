@@ -4,7 +4,10 @@ namespace DigiTickets\TescoClubcard\Responses\Interfaces;
 
 interface AbstractResponseInterface
 {
-    public function success(): bool;
+    /**
+     * @return bool
+     */
+    public function success();
 
     /**
      * @return string|null
