@@ -15,7 +15,7 @@ use DigiTickets\TescoClubcard\Responses\Interfaces\ValidateResponseInterface;
 use SoapClient;
 use SoapVar;
 
-class TescoClubcardBoostGateway extends AbstractTescoClubcardGateway
+class TescoClubcardIrelandGateway extends AbstractTescoClubcardGateway
 {
     /**
      * @return string

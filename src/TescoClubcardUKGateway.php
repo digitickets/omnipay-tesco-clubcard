@@ -12,7 +12,7 @@ use DigiTickets\TescoClubcard\Responses\Rewards\UnredeemResponse;
 use DigiTickets\TescoClubcard\Responses\Rewards\ValidateResponse;
 use GuzzleHttp\Client;
 
-class TescoClubcardRewardsGateway extends AbstractTescoClubcardGateway
+class TescoClubcardUKGateway extends AbstractTescoClubcardGateway
 {
     /**
      * @return string
