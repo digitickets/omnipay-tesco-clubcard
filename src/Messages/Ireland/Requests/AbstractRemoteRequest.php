@@ -19,13 +19,13 @@ abstract class AbstractRemoteRequest extends AbstractRequest
 
     public function getVoucherCode()
     {
-error_log('Returning voucher code to: '.$this->getParameter('voucherCode'));
+        error_log('Returning voucher code to: '.$this->getParameter('voucherCode'));
         return $this->getParameter('voucherCode');
     }
 
     public function setVoucherCode($voucherCode)
     {
-error_log('Setting voucher code to: '.$voucherCode);
+        error_log('Setting voucher code to: '.$voucherCode);
         return $this->setParameter('voucherCode', $voucherCode);
     }
 
@@ -45,7 +45,7 @@ error_log('Setting voucher code to: '.$voucherCode);
     /**
      * @return mixed
      */
-    function getData()
+    public function getData()
     {
         error_log('getData...');
         /**
@@ -84,7 +84,7 @@ EOT;
      * @param mixed $data
      * @return AbstractRemoteResponse
      */
-    function sendData($data)
+    public function sendData($data)
     {
         error_log('sendData... XML: '.$data);
         $options['trace'] = 1;
@@ -93,7 +93,7 @@ EOT;
         try {
             $client = new SoapClient($wsdl, $options);
             $body = new SoapVar($data, XSD_ANYXML);
-error_log('Got client and body');
+            error_log('Got client and body');
             //error_log('About to call TokenCheck()');
             // @TODO: Need to tell PHPStorm that $client has a method "TokenCheck".
             $result = $client->TokenCheck($body);
@@ -109,7 +109,7 @@ error_log('Got client and body');
             //error_log('Response: Response status: '.$responseXml->Response->Status);
             //error_log('Last request: '.var_export($client->__getLastRequest(), true));
         } catch (\Exception $e) {
-error_log('Error! '.$e->getMessage());
+            error_log('Error! '.$e->getMessage());
             $errorXml = <<<EOT
 <?xml version="1.0" encoding="utf-16"?>
 <Error message="{$e->getMessage()}"></Error>

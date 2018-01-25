@@ -44,7 +44,9 @@ abstract class AbstractTescoClubcardGateway extends AbstractGateway
      */
     public function getThirdPartyIdentifier()
     {
-        error_log('AbstractTescoClubcardGateway - getThirdPartyIdentifier: '.$this->getParameter('thirdPartyIdentifier'));
+        error_log(
+            'AbstractTescoClubcardGateway - getThirdPartyIdentifier: '.$this->getParameter('thirdPartyIdentifier')
+        );
 
         return $this->getParameter('thirdPartyIdentifier');
     }
