@@ -1,8 +1,8 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\Responses\Ireland;
+namespace DigiTickets\TescoClubcard\Messages\Ireland\Responses;
 
-use DigiTickets\TescoClubcard\Responses\Interfaces\UnredeemResponseInterface;
+use DigiTickets\TescoClubcard\Messages\Interfaces\UnredeemResponseInterface;
 
 class UnredeemResponse extends AbstractResponse implements UnredeemResponseInterface
 {

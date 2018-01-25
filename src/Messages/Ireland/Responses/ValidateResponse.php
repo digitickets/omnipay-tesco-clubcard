@@ -1,8 +1,8 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\Responses\Ireland;
+namespace DigiTickets\TescoClubcard\Messages\Ireland\Responses;
 
-use DigiTickets\TescoClubcard\Responses\Interfaces\ValidateResponseInterface;
+use DigiTickets\TescoClubcard\Messages\Interfaces\ValidateResponseInterface;
 
 class ValidateResponse extends AbstractResponse implements ValidateResponseInterface
 {
@@ -22,6 +22,7 @@ class ValidateResponse extends AbstractResponse implements ValidateResponseInter
         // Map the status to an error message.
         $map = [
             'NotFound' => 'Voucher was not found',
+            'Redeemed' => 'Voucher is already redeemed',
         ];
         $error = isset($map[$this->get('Status')])
             ?

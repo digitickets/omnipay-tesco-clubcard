@@ -1,6 +1,8 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\Responses\Ireland;
+namespace DigiTickets\TescoClubcard\Messages\Ireland\Responses;
+
+use Omnipay\Common\Message\RequestInterface;
 
 abstract class AbstractResponse
 {
@@ -23,6 +25,10 @@ abstract class AbstractResponse
     const STATUS_INVOICED = 'Invoiced';
 
     /**
+     * @var RequestInterface
+     */
+    private $request;
+    /**
      * @var bool
      */
     private $responseIsValid = false;
@@ -35,8 +41,9 @@ abstract class AbstractResponse
      */
     private $responseNode;
 
-    public function __construct(\SimpleXMLElement $response)
+    public function __construct(RequestInterface $request, \SimpleXMLElement $response)
     {
+        $this->request = $request;
         $this->responseXml = $response;
 
         $this->init();
@@ -44,10 +51,14 @@ abstract class AbstractResponse
 
     private function init()
     {
+error_log('init...');
         // Grab the first (and only) response node within the response object, and store it in the class.
         $responseNodes = $this->responseXml->xpath('//Response');
         if (count($responseNodes)) {
+error_log('Has response nodes');
             $this->responseNode = array_shift($responseNodes);
+error_log('Response code from response: '.$this->get('ResponseCode'));
+error_log('Comparing with: '.self::RESPONSE_CODE_SUCCESS);
             $this->responseIsValid = $this->get('ResponseCode') == self::RESPONSE_CODE_SUCCESS;
         }
     }

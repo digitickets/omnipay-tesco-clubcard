@@ -1,10 +1,10 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\Responses\Uk;
+namespace DigiTickets\TescoClubcard\Uk\Responses;
 
-use DigiTickets\TescoClubcard\Responses\Interfaces\RedeemResponseInterface;
+use DigiTickets\TescoClubcard\Responses\Interfaces\UnredeemResponseInterface;
 
-class RedeemResponse extends AbstractResponse implements RedeemResponseInterface
+class UnredeemResponse extends AbstractResponse implements UnredeemResponseInterface
 {
     /**
      * @return string

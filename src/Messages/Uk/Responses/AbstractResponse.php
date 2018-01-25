@@ -1,6 +1,6 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\Responses\Uk;
+namespace DigiTickets\TescoClubcard\Uk\Responses;
 
 abstract class AbstractResponse
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\Responses\Interfaces;
+namespace DigiTickets\TescoClubcard\Messages\Interfaces;
 
 interface ValidateResponseInterface extends AbstractResponseInterface
 {

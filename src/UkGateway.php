@@ -1,6 +1,6 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\Requests;
+namespace DigiTickets\TescoClubcard;
 
 use DigiTickets\TescoClubcard\Messages\AbstractMessage;
 use DigiTickets\TescoClubcard\Messages\ValidateMessage;
@@ -12,8 +12,21 @@ use DigiTickets\TescoClubcard\Responses\Uk\UnredeemResponse;
 use DigiTickets\TescoClubcard\Responses\Uk\ValidateResponse;
 use GuzzleHttp\Client;
 
-class TescoClubcardUKGateway extends AbstractTescoClubcardGateway
+class UkGateway extends AbstractTescoClubcardGateway
 {
+    public function getName()
+    {
+        return 'Tesco Clubcard Rewards';
+    }
+
+    public function purchase(array $parameters = array())
+    {
+        return $this->createRequest(
+            '\DigiTickets\TBA\PurchaseRequest',
+            $parameters
+        );
+    }
+
     /**
      * @return string
      */
