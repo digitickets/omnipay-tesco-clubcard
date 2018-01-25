@@ -1,0 +1,42 @@
+{
+  "name": "digitickets/omnipay-tesco-clubcard",
+  "type": "library",
+  "description": "Tesco Clubcard driver for the Omnipay payment processing library",
+  "keywords": [
+    "tesco",
+    "clubcard",
+    "gateway",
+    "merchant",
+    "omnipay",
+    "web",
+    "service",
+    "voucher"
+  ],
+  "homepage": "https://github.com/pedanticantic/omnipay-tesco-clubcard",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Glenn Jenkins",
+      "email": "pedanticantic@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "DigiTickets\\TescoClubcard\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "DigiTickets\\TescoClubcard\\": "tests/"
+    }
+  },
+  "require": {
+    "omnipay/common": "~2.0"
+  },
+  "require-dev": {
+    "omnipay/tests": "~2.0"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
