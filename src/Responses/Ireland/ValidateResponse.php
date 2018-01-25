@@ -23,7 +23,11 @@ class ValidateResponse extends AbstractResponse implements ValidateResponseInter
         $map = [
             'NotFound' => 'Voucher was not found',
         ];
-        $error = isset($map[$this->get('Status')]) ? $map[$this->get('Status')] : 'Unknown error [Ireland ValidateResponse]';
+        $error = isset($map[$this->get('Status')])
+            ?
+            $map[$this->get('Status')]
+            :
+            'Unknown error [Ireland ValidateResponse]';
 
         return $error;
     }

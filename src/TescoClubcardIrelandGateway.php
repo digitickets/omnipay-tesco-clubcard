@@ -65,7 +65,8 @@ EOT;
             //error_log('About to call TokenCheck()');
             // @TODO: Need to tell PHPStorm that $client has a method "TokenCheck".
             $result = $client->TokenCheck($body);
-            // @TODO: Need to handle $result->TokenCheckResult being an empty string. Will need to return my own XML object.
+            // @TODO: Need to handle $result->TokenCheckResult being an empty string.
+            // @TODO: Will need to return my own XML object.
             $resultXml = $result->TokenCheckResult;
             error_log('$result: '.var_export($resultXml, true));
             if (empty($resultXml)) {
