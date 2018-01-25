@@ -1,6 +1,6 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\Responses\Rewards;
+namespace DigiTickets\TescoClubcard\Responses\Uk;
 
 use DigiTickets\TescoClubcard\Responses\Interfaces\UnredeemResponseInterface;
 

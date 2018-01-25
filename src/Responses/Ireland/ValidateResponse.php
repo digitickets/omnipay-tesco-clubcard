@@ -1,6 +1,6 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\Responses\Boost;
+namespace DigiTickets\TescoClubcard\Responses\Ireland;
 
 use DigiTickets\TescoClubcard\Responses\Interfaces\ValidateResponseInterface;
 
@@ -23,7 +23,7 @@ class ValidateResponse extends AbstractResponse implements ValidateResponseInter
         $map = [
             'NotFound' => 'Voucher was not found',
         ];
-        $error = isset($map[$this->get('Status')]) ? $map[$this->get('Status')] : 'Unknown error [Boost ValidateResponse]';
+        $error = isset($map[$this->get('Status')]) ? $map[$this->get('Status')] : 'Unknown error [Ireland ValidateResponse]';
 
         return $error;
     }

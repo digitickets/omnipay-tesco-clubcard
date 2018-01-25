@@ -1,6 +1,6 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\Responses\Boost;
+namespace DigiTickets\TescoClubcard\Responses\Uk;
 
 use DigiTickets\TescoClubcard\Responses\Interfaces\RedeemResponseInterface;
 
@@ -11,7 +11,15 @@ class RedeemResponse extends AbstractResponse implements RedeemResponseInterface
      */
     protected function getSuccessStatusCode()
     {
-        return self::STATUS_ACTIVE;
+        return ''; // @TODO: Finish this.
+    }
+
+    /**
+     * @return bool
+     */
+    public function success()
+    {
+        return false; // @TODO: Needs finishing
     }
 
     /**
@@ -19,7 +27,6 @@ class RedeemResponse extends AbstractResponse implements RedeemResponseInterface
      */
     public function getErrorMessage()
     {
-        // @TODO: extract the error message out of the response.
-        return 'TBC';
+        return 'Has not been implemented yet';
     }
 }

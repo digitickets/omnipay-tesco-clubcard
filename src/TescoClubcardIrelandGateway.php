@@ -6,9 +6,9 @@ use DigiTickets\TescoClubcard\Messages\AbstractMessage;
 use DigiTickets\TescoClubcard\Messages\RedeemMessage;
 use DigiTickets\TescoClubcard\Messages\UnredeemMessage;
 use DigiTickets\TescoClubcard\Messages\ValidateMessage;
-use DigiTickets\TescoClubcard\Responses\Boost\RedeemResponse;
-use DigiTickets\TescoClubcard\Responses\Boost\UnredeemResponse;
-use DigiTickets\TescoClubcard\Responses\Boost\ValidateResponse;
+use DigiTickets\TescoClubcard\Responses\Ireland\RedeemResponse;
+use DigiTickets\TescoClubcard\Responses\Ireland\UnredeemResponse;
+use DigiTickets\TescoClubcard\Responses\Ireland\ValidateResponse;
 use DigiTickets\TescoClubcard\Responses\Interfaces\RedeemResponseInterface;
 use DigiTickets\TescoClubcard\Responses\Interfaces\UnredeemResponseInterface;
 use DigiTickets\TescoClubcard\Responses\Interfaces\ValidateResponseInterface;
@@ -114,7 +114,7 @@ EOT;
     public function validate($voucherNumber)
     {
         error_log('/');
-        error_log('validate voucher (Boost): '.$voucherNumber);
+        error_log('validate voucher (Ireland): '.$voucherNumber);
         $message = new ValidateMessage($voucherNumber);
 
         //error_log('Validate $message: '.var_export($message, true));
@@ -128,7 +128,7 @@ EOT;
     public function redeem($voucherNumber)
     {
         error_log('/');
-        error_log('validate voucher (Boost): '.$voucherNumber);
+        error_log('validate voucher (Ireland): '.$voucherNumber);
         $message = new RedeemMessage($voucherNumber);
 
         //error_log('Redeem $message: '.var_export($message, true));
@@ -142,7 +142,7 @@ EOT;
     public function unredeem($voucherNumber)
     {
         error_log('/');
-        error_log('validate voucher (Boost): '.$voucherNumber);
+        error_log('validate voucher (Ireland): '.$voucherNumber);
         $message = new UnredeemMessage($voucherNumber);
 
         //error_log('Unredeem $message: '.var_export($message, true));

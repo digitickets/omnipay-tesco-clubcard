@@ -1,6 +1,6 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\Responses\Boost;
+namespace DigiTickets\TescoClubcard\Responses\Ireland;
 
 abstract class AbstractResponse
 {

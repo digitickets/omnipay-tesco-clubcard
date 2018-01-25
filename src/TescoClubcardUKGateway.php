@@ -7,9 +7,9 @@ use DigiTickets\TescoClubcard\Messages\ValidateMessage;
 use DigiTickets\TescoClubcard\Responses\Interfaces\RedeemResponseInterface;
 use DigiTickets\TescoClubcard\Responses\Interfaces\UnredeemResponseInterface;
 use DigiTickets\TescoClubcard\Responses\Interfaces\ValidateResponseInterface;
-use DigiTickets\TescoClubcard\Responses\Rewards\RedeemResponse;
-use DigiTickets\TescoClubcard\Responses\Rewards\UnredeemResponse;
-use DigiTickets\TescoClubcard\Responses\Rewards\ValidateResponse;
+use DigiTickets\TescoClubcard\Responses\Uk\RedeemResponse;
+use DigiTickets\TescoClubcard\Responses\Uk\UnredeemResponse;
+use DigiTickets\TescoClubcard\Responses\Uk\ValidateResponse;
 use GuzzleHttp\Client;
 
 class TescoClubcardUKGateway extends AbstractTescoClubcardGateway
@@ -33,7 +33,7 @@ class TescoClubcardUKGateway extends AbstractTescoClubcardGateway
      */
     private function send(AbstractMessage $message)
     {
-        error_log('Sending a Reward request');
+        error_log('Sending a Uk request');
         // Need to substitute all the things in.
         $message = [
             'TransactionID' => $this->generateTransactionId(),
@@ -66,7 +66,7 @@ class TescoClubcardUKGateway extends AbstractTescoClubcardGateway
         ];
         error_log('$params: '.var_export($params, true));
         $response = $client->post('ManageToken', $params);
-        error_log('Rewards $response: '.var_export($response, true));
+        error_log('Uk $response: '.var_export($response, true));
 
         $result = json_decode($response->getBody()->getContents());
         error_log('Response body: '.var_export($result, true));
@@ -92,7 +92,7 @@ class TescoClubcardUKGateway extends AbstractTescoClubcardGateway
     public function validate($voucherNumber)
     {
         error_log('/');
-        error_log('validate voucher (Rewards): '.$voucherNumber);
+        error_log('validate voucher (Uk): '.$voucherNumber);
         $message = new ValidateMessage($voucherNumber);
         //error_log('Validate $message: '.var_export($message, true));
         return new ValidateResponse($this->send($message));
