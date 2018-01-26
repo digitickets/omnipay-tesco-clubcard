@@ -4,17 +4,17 @@ namespace DigiTickets\TescoClubcard\Messages\Ireland\Requests;
 
 use DigiTickets\TescoClubcard\Messages\AbstractMessage;
 use DigiTickets\TescoClubcard\Messages\Ireland\Responses\AbstractResponse;
-use DigiTickets\TescoClubcard\Messages\Ireland\Responses\ValidateResponse;
-use DigiTickets\TescoClubcard\Messages\ValidateMessage;
+use DigiTickets\TescoClubcard\Messages\Ireland\Responses\RedeemResponse;
+use DigiTickets\TescoClubcard\Messages\RedeemMessage;
 
-class ValidateRequest extends AbstractRemoteRequest
+class RedeemRequest extends AbstractRemoteRequest
 {
     /**
      * @return AbstractMessage
      */
     protected function buildMessage()
     {
-        return new ValidateMessage($this->getVoucherCode());
+        return new RedeemMessage($this->getVoucherCode());
     }
 
     /**
@@ -24,6 +24,6 @@ class ValidateRequest extends AbstractRemoteRequest
      */
     protected function buildResponse($request, $response)
     {
-        return new ValidateResponse($request, $response);
+        return new RedeemResponse($request, $response);
     }
 }

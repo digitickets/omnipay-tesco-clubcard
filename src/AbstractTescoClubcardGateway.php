@@ -93,13 +93,13 @@ abstract class AbstractTescoClubcardGateway extends AbstractGateway
      * @param string $voucherNumber
      * @return RedeemResponseInterface
      */
-    abstract public function redeem($voucherNumber);
+    abstract public function redeem(array $parameters = array());
 
     /**
      * @param string $voucherNumber
      * @return UnredeemResponseInterface
      */
-    abstract public function unredeem($voucherNumber);
+    abstract public function unredeem(array $parameters = array());
 
     // @TODO: Do "cancel" and "add reference" at some point.
 }

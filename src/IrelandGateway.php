@@ -40,27 +40,23 @@ class IrelandGateway extends AbstractTescoClubcardGateway
      * @param string $voucherNumber
      * @return RedeemResponseInterface
      */
-    public function redeem($voucherNumber)
+    public function redeem(array $parameters = array())
     {
-        error_log('/');
-        error_log('validate voucher (Ireland): '.$voucherNumber);
-        $message = new RedeemMessage($voucherNumber);
-
-        //error_log('Redeem $message: '.var_export($message, true));
-        return new RedeemResponse($this->send($message));
+        return $this->createRequest(
+            '\DigiTickets\TescoClubcard\Messages\Ireland\Requests\RedeemRequest',
+            $parameters
+        );
     }
 
     /**
      * @param string $voucherNumber
      * @return UnredeemResponseInterface
      */
-    public function unredeem($voucherNumber)
+    public function unredeem(array $parameters = array())
     {
-        error_log('/');
-        error_log('validate voucher (Ireland): '.$voucherNumber);
-        $message = new UnredeemMessage($voucherNumber);
-
-        //error_log('Unredeem $message: '.var_export($message, true));
-        return new UnredeemResponse($this->send($message));
+        return $this->createRequest(
+            '\DigiTickets\TescoClubcard\Messages\Ireland\Requests\UnredeemRequest',
+            $parameters
+        );
     }
 }
