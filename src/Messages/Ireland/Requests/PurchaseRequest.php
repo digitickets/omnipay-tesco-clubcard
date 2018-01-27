@@ -3,7 +3,8 @@
 namespace DigiTickets\TescoClubcard\Messages\Ireland\Requests;
 
 /**
- * Purchase request does everything that AuthorizeRequest does, plus if it's successful, it actually redeems the vouchers.
+ * Purchase request does everything that AuthorizeRequest does, plus if it's successful, it actually
+ * redeems the vouchers.
  */
 class PurchaseRequest extends AuthorizeRequest
 {
