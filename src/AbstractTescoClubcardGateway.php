@@ -2,17 +2,40 @@
 
 namespace DigiTickets\TescoClubcard;
 
-use DigiTickets\TescoClubcard\Responses\Interfaces\RedeemResponseInterface;
-use DigiTickets\TescoClubcard\Responses\Interfaces\UnredeemResponseInterface;
-use DigiTickets\TescoClubcard\Responses\Interfaces\ValidateResponseInterface;
+use DigiTickets\TescoClubcard\Messages\Interfaces\RedeemResponseInterface;
+use DigiTickets\TescoClubcard\Messages\Interfaces\UnredeemResponseInterface;
+use DigiTickets\TescoClubcard\Messages\Interfaces\ValidateResponseInterface;
 use Omnipay\Common\AbstractGateway;
 
+/**
+ * Class AbstractTescoClubcardGateway
+ *
+ * @method RequestInterface authorize(array $options = array())         (Optional method)
+ *         Authorize an amount on the customers card
+ * @method RequestInterface completeAuthorize(array $options = array()) (Optional method)
+ *         Handle return from off-site gateways after authorization
+ * @method RequestInterface capture(array $options = array())           (Optional method)
+ *         Capture an amount you have previously authorized
+ * @method RequestInterface completePurchase(array $options = array())  (Optional method)
+ *         Handle return from off-site gateways after purchase
+ * @method RequestInterface refund(array $options = array())            (Optional method)
+ *         Refund an already processed transaction
+ * @method RequestInterface void(array $options = array())              (Optional method)
+ *         Generally can only be called up to 24 hours after submitting a transaction
+ * @method RequestInterface createCard(array $options = array())        (Optional method)
+ *         The returned response object includes a cardReference, which can be used for future transactions
+ * @method RequestInterface updateCard(array $options = array())        (Optional method)
+ *         Update a stored card
+ * @method RequestInterface deleteCard(array $options = array())        (Optional method)
+ *         Delete a stored card
+ */
 abstract class AbstractTescoClubcardGateway extends AbstractGateway
 {
     abstract public function purchase(array $parameters = array());
 
     /**
      * @param string $supplierCode
+     * @return AbstractTescoClubcardGateway
      */
     public function setSupplierCode($supplierCode)
     {
@@ -32,6 +55,7 @@ abstract class AbstractTescoClubcardGateway extends AbstractGateway
 
     /**
      * @param string $thirdPartyIdentifier
+     * @return AbstractTescoClubcardGateway
      */
     public function setThirdPartyIdentifier($thirdPartyIdentifier)
     {
@@ -61,6 +85,7 @@ abstract class AbstractTescoClubcardGateway extends AbstractGateway
 
     /**
      * @param string $appKeyToken
+     * @return AbstractTescoClubcardGateway
      */
     public function setAppKeyToken($appKeyToken)
     {
@@ -77,6 +102,7 @@ abstract class AbstractTescoClubcardGateway extends AbstractGateway
 
     /**
      * @param string $appKey
+     * @return AbstractTescoClubcardGateway
      */
     public function setAppKey($appKey)
     {
@@ -90,13 +116,13 @@ abstract class AbstractTescoClubcardGateway extends AbstractGateway
     abstract public function validate(array $parameters = array());
 
     /**
-     * @param string $voucherNumber
+     * @param array $parameters
      * @return RedeemResponseInterface
      */
     abstract public function redeem(array $parameters = array());
 
     /**
-     * @param string $voucherNumber
+     * @param array $parameters
      * @return UnredeemResponseInterface
      */
     abstract public function unredeem(array $parameters = array());

@@ -88,6 +88,7 @@ abstract class AbstractResponse
      */
     public function success()
     {
+        // @TODO: Should it check things like expiry date?
         return $this->responseIsValid && $this->get('Status') == $this->getSuccessStatusCode();
     }
 }

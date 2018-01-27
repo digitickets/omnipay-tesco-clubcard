@@ -40,4 +40,9 @@ class ValidateResponse extends AbstractResponse implements ValidateResponseInter
     {
         return ((int) $this->get('ValueString')) / 100;
     }
+
+    public function getProductType()
+    {
+        return $this->get('ProductType');
+    }
 }

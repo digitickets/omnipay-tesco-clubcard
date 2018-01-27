@@ -4,20 +4,12 @@ namespace DigiTickets\TescoClubcard\Messages\Ireland\Requests;
 
 class PurchaseRequest extends AbstractRemoteRequest
 {
-    /**
-     * @param string $data
-     * @return AbstractMessage
-     */
-    protected function buildMessage($data)
+    protected function buildMessage()
     {
         // @TODO: PurchaseMessage not defined yet.
-        return new PurchaseMessage($data);
+        return new PurchaseMessage();
     }
-    /**
-     * @param RequestInterface $request
-     * @param mixed $response
-     * @return AbstractRemoteResponse
-     */
+
     protected function buildResponse($request, $response)
     {
         // @TODO: PurchaseResponse not defined yet. Will need to add a request property + getter.

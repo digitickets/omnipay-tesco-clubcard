@@ -2,16 +2,12 @@
 
 namespace DigiTickets\TescoClubcard;
 
-use DigiTickets\TescoClubcard\Messages\AbstractMessage;
-use DigiTickets\TescoClubcard\Messages\RedeemMessage;
-use DigiTickets\TescoClubcard\Messages\UnredeemMessage;
-use DigiTickets\TescoClubcard\Messages\ValidateMessage;
-use DigiTickets\TescoClubcard\Responses\Ireland\RedeemResponse;
-use DigiTickets\TescoClubcard\Responses\Ireland\UnredeemResponse;
-use DigiTickets\TescoClubcard\Responses\Ireland\ValidateResponse;
-use DigiTickets\TescoClubcard\Responses\Interfaces\RedeemResponseInterface;
-use DigiTickets\TescoClubcard\Responses\Interfaces\UnredeemResponseInterface;
-use DigiTickets\TescoClubcard\Responses\Interfaces\ValidateResponseInterface;
+use DigiTickets\TescoClubcard\Messages\Ireland\Requests\AuthorizeRequest;
+use DigiTickets\TescoClubcard\Messages\Ireland\Requests\PurchaseRequest;
+use DigiTickets\TescoClubcard\Messages\Ireland\Requests\RedeemRequest;
+use DigiTickets\TescoClubcard\Messages\Ireland\Requests\UnredeemRequest;
+use DigiTickets\TescoClubcard\Messages\Ireland\Requests\ValidateRequest;
+use Omnipay\Common\Message\AbstractRequest;
 
 class IrelandGateway extends AbstractTescoClubcardGateway
 {
@@ -20,43 +16,37 @@ class IrelandGateway extends AbstractTescoClubcardGateway
         return 'Tesco Clubcard Boost';
     }
 
+    public function authorize(array $parameters = array())
+    {
+        $parameters['validateRequest'] = $this->validate($parameters);
+        return $this->createRequest(AuthorizeRequest::class, $parameters);
+    }
+
     public function purchase(array $parameters = array())
     {
-        return $this->createRequest(
-            '\DigiTickets\TescoClubcard\Messages\Ireland\Requests\PurchaseRequest',
-            $parameters
-        );
+        return $this->createRequest(PurchaseRequest::class, $parameters);
     }
 
     public function validate(array $parameters = array())
     {
-        return $this->createRequest(
-            '\DigiTickets\TescoClubcard\Messages\Ireland\Requests\ValidateRequest',
-            $parameters
-        );
+        return $this->createRequest(ValidateRequest::class, $parameters);
     }
 
     /**
-     * @param string $voucherNumber
-     * @return RedeemResponseInterface
+     * @param array $parameters
+     * @return AbstractRequest
      */
     public function redeem(array $parameters = array())
     {
-        return $this->createRequest(
-            '\DigiTickets\TescoClubcard\Messages\Ireland\Requests\RedeemRequest',
-            $parameters
-        );
+        return $this->createRequest(RedeemRequest::class, $parameters);
     }
 
     /**
-     * @param string $voucherNumber
-     * @return UnredeemResponseInterface
+     * @param array $parameters
+     * @return AbstractRequest
      */
     public function unredeem(array $parameters = array())
     {
-        return $this->createRequest(
-            '\DigiTickets\TescoClubcard\Messages\Ireland\Requests\UnredeemRequest',
-            $parameters
-        );
+        return $this->createRequest(UnredeemRequest::class, $parameters);
     }
 }
