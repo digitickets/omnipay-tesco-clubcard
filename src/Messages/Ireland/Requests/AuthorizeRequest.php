@@ -69,7 +69,8 @@ class AuthorizeRequest extends AbstractRequest
 
     protected function subtractFromProductTypes($cartItem)
     {
-        $thirdPartyID = isset($cartItem['thirdPartyID']) && $cartItem['thirdPartyID'] ? $cartItem['thirdPartyID'] : null;
+        $thirdPartyID =
+            isset($cartItem['thirdPartyID']) && $cartItem['thirdPartyID'] ? $cartItem['thirdPartyID'] : null;
         if ($thirdPartyID) {
             if (isset($this->productTypes[$thirdPartyID])) {
                 $this->productTypes[$thirdPartyID] -= $cartItem['qty'];
