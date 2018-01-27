@@ -2,17 +2,22 @@
 
 namespace DigiTickets\TescoClubcard\Messages\Ireland\Requests;
 
-class PurchaseRequest extends AbstractRemoteRequest
+/**
+ * Purchase request does everything that AuthorizeRequest does, plus if it's successful, it actually redeems the vouchers.
+ */
+class PurchaseRequest extends AuthorizeRequest
 {
-    protected function buildMessage()
+    public function sendData($data)
     {
-        // @TODO: PurchaseMessage not defined yet.
-        return new PurchaseMessage();
-    }
+        // Do all the authorisation stuff.
+        $purchaseResponse = parent::sendData($data);
 
-    protected function buildResponse($request, $response)
-    {
-        // @TODO: PurchaseResponse not defined yet. Will need to add a request property + getter.
-        return new PurchaseResponse($request, $response);
+        // If authorisation was successful, actually redeem the vouchers.
+        if ($purchaseResponse->success()) {
+            error_log('We would redeem the voucher codes here...');
+            error_log('These should be the voucher codes: ' . var_export($data, true));
+        }
+
+        return $purchaseResponse;
     }
 }
