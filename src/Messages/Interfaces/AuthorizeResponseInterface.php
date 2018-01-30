@@ -2,6 +2,8 @@
 
 namespace DigiTickets\TescoClubcard\Messages\Interfaces;
 
-interface AuthorizeResponseInterface extends AbstractResponseInterface
+use Omnipay\Common\Message\ResponseInterface;
+
+interface AuthorizeResponseInterface extends ResponseInterface
 {
 }

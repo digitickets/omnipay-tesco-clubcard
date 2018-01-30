@@ -118,13 +118,16 @@ class AuthorizeRequest extends AbstractRequest
                 $this->subtractFromProductTypes($cartItem);
             }
             if ($this->anyRemainingProductTypes()) {
-                return new AuthorizeResponse('One or more vouchers cannot be assigned to items in your cart');
+                return new AuthorizeResponse($this, 'One or more vouchers cannot be assigned to items in your cart');
             }
 
-            return new AuthorizeResponse();
+            // @TODO: We need to include an array of the voucher codes, and possibly our generated unique id from
+            // @TODO: the requests. Might need to include these in all instantiations of AuthorizeResponse, and
+            // @TODO: include a flag to say whether or not there was an error.
+            return new AuthorizeResponse($this, $data);
 
         } catch (\Exception $e) {
-            return new AuthorizeResponse($e->getMessage());
+            return new AuthorizeResponse($this, $e->getMessage());
         }
 
     }

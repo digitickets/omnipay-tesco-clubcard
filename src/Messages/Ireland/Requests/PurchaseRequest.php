@@ -14,7 +14,7 @@ class PurchaseRequest extends AuthorizeRequest
         $purchaseResponse = parent::sendData($data);
 
         // If authorisation was successful, actually redeem the vouchers.
-        if ($purchaseResponse->success()) {
+        if ($purchaseResponse->isSuccessful()) {
             error_log('We would redeem the voucher codes here...');
             error_log('These should be the voucher codes: ' . var_export($data, true));
         }
