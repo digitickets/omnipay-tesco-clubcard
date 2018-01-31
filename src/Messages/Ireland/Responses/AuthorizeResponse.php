@@ -35,7 +35,7 @@ class AuthorizeResponse extends AbstractResponse implements AuthorizeResponseInt
         // If $data is a string, it means there's been an error; if it's an array, it's an array of voucher codes.
         $this->successful = is_array($this->data);
         if ($this->successful) {
-            $this->data = $data; // An array of voucher codes.
+            $this->data = $data; // An array of voucher codes and their values.
             $this->responseCode = 'Authorised'; // @TODO: In the purchase Response, override this with "Redeemed".
             $this->message = $this->responseCode;
         } else {
@@ -81,6 +81,6 @@ class AuthorizeResponse extends AbstractResponse implements AuthorizeResponseInt
      */
     public function getTransactionReference()
     {
-        return implode(',', $this->data);
+        return json_encode($this->data);
     }
 }

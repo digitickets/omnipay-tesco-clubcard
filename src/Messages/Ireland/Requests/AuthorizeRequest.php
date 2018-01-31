@@ -98,6 +98,7 @@ class AuthorizeRequest extends AbstractRequest
     public function sendData($data)
     {
         $this->resetProductTypes();
+        $result = [];
         try {
             // This doesn't actually send any data; it validates each voucher in the set, then checks
             // that the set of vouchers is compatible with the purchase items.
@@ -109,6 +110,7 @@ class AuthorizeRequest extends AbstractRequest
                 if (!$response->success()) {
                     throw new \RuntimeException($response->getErrorMessage());
                 }
+                $result[] = ['voucherCode' => $voucherCode, 'value' => $response->getValue()];
                 $this->addProductType($response->getProductType());
             }
             // Check that there are enough items in the cart for all the voucher's product types.
@@ -124,11 +126,10 @@ class AuthorizeRequest extends AbstractRequest
             // @TODO: We need to include an array of the voucher codes, and possibly our generated unique id from
             // @TODO: the requests. Might need to include these in all instantiations of AuthorizeResponse, and
             // @TODO: include a flag to say whether or not there was an error.
-            return new AuthorizeResponse($this, $data);
+            return new AuthorizeResponse($this, $result);
 
         } catch (\Exception $e) {
             return new AuthorizeResponse($this, $e->getMessage());
         }
-
     }
 }
