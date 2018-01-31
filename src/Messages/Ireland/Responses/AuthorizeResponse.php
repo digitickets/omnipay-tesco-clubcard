@@ -16,11 +16,11 @@ class AuthorizeResponse extends AbstractResponse implements AuthorizeResponseInt
     /**
      * @var string|null
      */
-    private $message = null;
+    protected $message = null;
     /**
      * @var string|null
      */
-    private $responseCode = null;
+    protected $responseCode = null;
 
     /**
      * Constructor

@@ -25,6 +25,7 @@ class IrelandGateway extends AbstractTescoClubcardGateway
     public function purchase(array $parameters = array())
     {
         $parameters['validateRequest'] = $this->validate($parameters);
+        $parameters['redeemRequest'] = $this->redeem($parameters);
         return $this->createRequest(PurchaseRequest::class, $parameters);
     }
 
