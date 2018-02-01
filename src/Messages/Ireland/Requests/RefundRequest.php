@@ -25,11 +25,12 @@ class RefundRequest extends AbstractRequest
 
     public function getData()
     {
-        return $this->unredeemRequest->getVoucherCode();
+        return $this->getTransactionReference();
     }
 
     public function sendData($data)
     {
+        $this->unredeemRequest->setVoucherCode($data);
         /** @var UnredeemResponse $unredeemResponse */
         $unredeemResponse = $this->unredeemRequest->send();
 

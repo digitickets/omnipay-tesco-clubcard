@@ -53,7 +53,7 @@ class RefundResponse extends AbstractResponse implements RefundResponseInterface
      */
     public function getCode()
     {
-        return $this->request->getVoucherCode();
+        return $this->request->getTransactionReference();
     }
 
     /**

@@ -11,7 +11,7 @@ class RedeemResponse extends AbstractResponse implements RedeemResponseInterface
      */
     protected function getSuccessStatusCode()
     {
-        return self::STATUS_ACTIVE;
+        return self::STATUS_REDEEMED;
     }
 
     /**

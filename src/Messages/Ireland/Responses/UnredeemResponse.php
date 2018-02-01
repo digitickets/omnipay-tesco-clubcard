@@ -20,6 +20,6 @@ class UnredeemResponse extends AbstractResponse implements UnredeemResponseInter
     public function getErrorMessage()
     {
         // @TODO: extract the error message out of the response.
-        return 'TBC bbb';
+        return 'The voucher could not be unredeemed';
     }
 }
