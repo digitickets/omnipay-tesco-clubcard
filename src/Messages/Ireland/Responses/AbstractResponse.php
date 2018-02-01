@@ -27,7 +27,7 @@ abstract class AbstractResponse
     /**
      * @var RequestInterface
      */
-    private $request;
+    protected $request;
     /**
      * @var bool
      */

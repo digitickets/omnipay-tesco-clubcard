@@ -10,16 +10,12 @@ use Omnipay\Common\AbstractGateway;
 /**
  * Class AbstractTescoClubcardGateway
  *
- * @method RequestInterface authorize(array $options = array())         (Optional method)
- *         Authorize an amount on the customers card
  * @method RequestInterface completeAuthorize(array $options = array()) (Optional method)
  *         Handle return from off-site gateways after authorization
  * @method RequestInterface capture(array $options = array())           (Optional method)
  *         Capture an amount you have previously authorized
  * @method RequestInterface completePurchase(array $options = array())  (Optional method)
  *         Handle return from off-site gateways after purchase
- * @method RequestInterface refund(array $options = array())            (Optional method)
- *         Refund an already processed transaction
  * @method RequestInterface void(array $options = array())              (Optional method)
  *         Generally can only be called up to 24 hours after submitting a transaction
  * @method RequestInterface createCard(array $options = array())        (Optional method)

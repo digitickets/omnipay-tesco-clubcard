@@ -29,6 +29,12 @@ class IrelandGateway extends AbstractTescoClubcardGateway
         return $this->createRequest(PurchaseRequest::class, $parameters);
     }
 
+    public function refund(array $parameters = array())
+    {
+        $parameters['unredeemRequest'] = $this->unredeem($parameters);
+        return $this->createRequest(RefundRequest::class, $parameters);
+    }
+
     public function validate(array $parameters = array())
     {
         return $this->createRequest(ValidateRequest::class, $parameters);
