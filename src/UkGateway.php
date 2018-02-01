@@ -19,12 +19,45 @@ class UkGateway extends AbstractTescoClubcardGateway
         return 'Tesco Clubcard Rewards';
     }
 
+    // @TODO: Need to implement authorize() and refund()
+
     public function purchase(array $parameters = array())
     {
         return $this->createRequest(
             '\DigiTickets\TBA\PurchaseRequest',
             $parameters
         );
+    }
+
+    /**
+     * @param string $voucherNumber
+     * @return ValidateResponseInterface
+     */
+    public function validate($voucherNumber)
+    {
+        error_log('/');
+        error_log('validate voucher (Uk): '.$voucherNumber);
+        $message = new ValidateMessage($voucherNumber);
+        //error_log('Validate $message: '.var_export($message, true));
+        return new ValidateResponse($this->send($message));
+    }
+
+    /**
+     * @param string $voucherNumber
+     * @return RedeemResponseInterface
+     */
+    public function redeem($voucherNumber)
+    {
+        return new RedeemResponse(json_decode('{"dummy":"true"}'));
+    }
+
+    /**
+     * @param string $voucherNumber
+     * @return UnredeemResponseInterface
+     */
+    public function unredeem($voucherNumber)
+    {
+        return new UnredeemResponse(json_decode('{"dummy":"true"}'));
     }
 
     /**
@@ -96,36 +129,5 @@ class UkGateway extends AbstractTescoClubcardGateway
     protected function getReferenceNo()
     {
         return 'NOIDEA'; // No idea what this is supposed to be.
-    }
-
-    /**
-     * @param string $voucherNumber
-     * @return ValidateResponseInterface
-     */
-    public function validate($voucherNumber)
-    {
-        error_log('/');
-        error_log('validate voucher (Uk): '.$voucherNumber);
-        $message = new ValidateMessage($voucherNumber);
-        //error_log('Validate $message: '.var_export($message, true));
-        return new ValidateResponse($this->send($message));
-    }
-
-    /**
-     * @param string $voucherNumber
-     * @return RedeemResponseInterface
-     */
-    public function redeem($voucherNumber)
-    {
-        return new RedeemResponse(json_decode('{"dummy":"true"}'));
-    }
-
-    /**
-     * @param string $voucherNumber
-     * @return UnredeemResponseInterface
-     */
-    public function unredeem($voucherNumber)
-    {
-        return new UnredeemResponse(json_decode('{"dummy":"true"}'));
     }
 }

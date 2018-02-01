@@ -32,17 +32,14 @@ class PurchaseRequest extends AuthorizeRequest
 
         // If authorisation was successful, actually redeem the vouchers.
         if (!$authorizeResponse->isSuccessful()) {
-            return new PurchaseResponse($this, 'Authorization failed');
+            return new PurchaseResponse($this, 'Authorization failed: '.$authorizeResponse->getMessage());
         }
 
-        error_log('Redeeming the voucher codes here...');
         foreach ($data as $voucherCode) {
-            error_log('Next voucher to redeem: '.$voucherCode);
             $redeemRequest = clone $this->redeemRequest;
             $redeemRequest->setVoucherCode($voucherCode);
             /** @var RedeemResponse $response */
             $response = $redeemRequest->send();
-            error_log('It seemed to be successful');
             if (!$response->success()) {
                 return new PurchaseResponse($this, 'Failed to redeem all the vouchers');
             }

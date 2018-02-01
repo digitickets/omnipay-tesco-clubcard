@@ -2,9 +2,10 @@
 
 namespace DigiTickets\TescoClubcard\Messages\Ireland\Responses;
 
+use DigiTickets\TescoClubcard\Messages\Interfaces\PurchaseResponseInterface;
 use Omnipay\Common\Message\RequestInterface;
 
-class PurchaseResponse extends AuthorizeResponse
+class PurchaseResponse extends AuthorizeResponse implements PurchaseResponseInterface
 {
     public function __construct(RequestInterface $request, $data)
     {

@@ -20,6 +20,6 @@ class RedeemResponse extends AbstractResponse implements RedeemResponseInterface
     public function getErrorMessage()
     {
         // @TODO: extract the error message out of the response.
-        return 'TBC aaa';
+        return 'TBC (redeem response)';
     }
 }

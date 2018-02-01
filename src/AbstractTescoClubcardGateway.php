@@ -27,8 +27,33 @@ use Omnipay\Common\AbstractGateway;
  */
 abstract class AbstractTescoClubcardGateway extends AbstractGateway
 {
+    // These are standard omnipay methods.
+    abstract public function authorize(array $parameters = array());
     abstract public function purchase(array $parameters = array());
+    abstract public function refund(array $parameters = array());
 
+    // These are the methods that the above methods actually use to communicate with the API.
+    /**
+     * @param array $parameters
+     * @return ValidateResponseInterface
+     */
+    abstract public function validate(array $parameters = array());
+
+    /**
+     * @param array $parameters
+     * @return RedeemResponseInterface
+     */
+    abstract public function redeem(array $parameters = array());
+
+    /**
+     * @param array $parameters
+     * @return UnredeemResponseInterface
+     */
+    abstract public function unredeem(array $parameters = array());
+
+    abstract public function getName();
+
+    // Methods to set/get the various credentials.
     /**
      * @param string $supplierCode
      * @return AbstractTescoClubcardGateway
@@ -104,24 +129,6 @@ abstract class AbstractTescoClubcardGateway extends AbstractGateway
     {
         return $this->setParameter('appKey', $appKey);
     }
-
-    /**
-     * @param array $parameters
-     * @return ValidateResponseInterface
-     */
-    abstract public function validate(array $parameters = array());
-
-    /**
-     * @param array $parameters
-     * @return RedeemResponseInterface
-     */
-    abstract public function redeem(array $parameters = array());
-
-    /**
-     * @param array $parameters
-     * @return UnredeemResponseInterface
-     */
-    abstract public function unredeem(array $parameters = array());
 
     // @TODO: Do "cancel" and "add reference" at some point.
 }

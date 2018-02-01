@@ -7,7 +7,7 @@ use DigiTickets\TescoClubcard\Messages\Ireland\Responses\AbstractResponse;
 use DigiTickets\TescoClubcard\Messages\Ireland\Responses\UnredeemResponse;
 use DigiTickets\TescoClubcard\Messages\UnredeemMessage;
 
-class UnredeemRequest extends AbstractRemoteRequest
+class UnredeemRequest extends AbstractApiRequest
 {
     /**
      * @return AbstractMessage

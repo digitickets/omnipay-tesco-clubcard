@@ -2,7 +2,7 @@
 
 namespace DigiTickets\TescoClubcard\Messages\Ireland\Requests;
 
-// @TODO: Could we make them common between the 2 APIs? Ie same methods?
+// @TODO: Could we make them common between the 2 APIs? Ie are they identical?
 use DigiTickets\TescoClubcard\Messages\Ireland\Responses\AuthorizeResponse;
 use DigiTickets\TescoClubcard\Messages\Ireland\Responses\ValidateResponse;
 use Omnipay\Common\Message\AbstractRequest;
@@ -99,9 +99,11 @@ class AuthorizeRequest extends AbstractRequest
     {
         $this->resetProductTypes();
         $result = [];
+        $voucherTotalValue = 0;
         try {
-            // This doesn't actually send any data; it validates each voucher in the set, then checks
-            // that the set of vouchers is compatible with the purchase items.
+            // This doesn't actually send any data itself; it validates each voucher in the set via the
+            // validate() method, then checks that the set of vouchers is compatible with the purchase
+            // items.
             foreach ($data as $voucherCode) {
                 $validateRequest = clone $this->validateRequest;
                 $validateRequest->setVoucherCode($voucherCode);
@@ -112,6 +114,7 @@ class AuthorizeRequest extends AbstractRequest
                 }
                 $result[] = ['voucherCode' => $voucherCode, 'value' => $response->getValue()];
                 $this->addProductType($response->getProductType());
+                $voucherTotalValue += $response->getValue();
             }
             // Check that there are enough items in the cart for all the voucher's product types.
             // Go through the cart, decrementing the voucher product type count for each item. At the end, if
@@ -121,6 +124,10 @@ class AuthorizeRequest extends AbstractRequest
             }
             if ($this->anyRemainingProductTypes()) {
                 return new AuthorizeResponse($this, 'One or more vouchers cannot be assigned to items in your cart');
+            }
+            // Check that the total voucher value is not greater than the cart total.
+            if ($voucherTotalValue > $this->cartTotal) {
+                return new AuthorizeResponse($this, 'Voucher total is greater than the cart total');
             }
 
             // @TODO: We need to include an array of the voucher codes, and possibly our generated unique id from

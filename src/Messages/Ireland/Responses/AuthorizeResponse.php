@@ -6,7 +6,6 @@ use DigiTickets\TescoClubcard\Messages\Interfaces\AuthorizeResponseInterface;
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RequestInterface;
 
-// @TODO: PurchaseResponse needs to extend this, and set the statuses to "Redeemed" instead of "authorised".
 class AuthorizeResponse extends AbstractResponse implements AuthorizeResponseInterface
 {
     /**
@@ -36,7 +35,7 @@ class AuthorizeResponse extends AbstractResponse implements AuthorizeResponseInt
         $this->successful = is_array($this->data);
         if ($this->successful) {
             $this->data = $data; // An array of voucher codes and their values.
-            $this->responseCode = 'Authorised'; // @TODO: In the purchase Response, override this with "Redeemed".
+            $this->responseCode = 'Authorised';
             $this->message = $this->responseCode;
         } else {
             $this->data = [];

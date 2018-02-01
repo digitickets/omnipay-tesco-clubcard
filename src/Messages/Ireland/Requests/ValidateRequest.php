@@ -7,7 +7,7 @@ use DigiTickets\TescoClubcard\Messages\Ireland\Responses\AbstractResponse;
 use DigiTickets\TescoClubcard\Messages\Ireland\Responses\ValidateResponse;
 use DigiTickets\TescoClubcard\Messages\ValidateMessage;
 
-class ValidateRequest extends AbstractRemoteRequest
+class ValidateRequest extends AbstractApiRequest
 {
     /**
      * @return AbstractMessage
