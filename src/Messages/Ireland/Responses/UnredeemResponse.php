@@ -19,7 +19,7 @@ class UnredeemResponse extends AbstractResponse implements UnredeemResponseInter
      */
     public function getErrorMessage()
     {
-        // @TODO: extract the error message out of the response.
-        return 'The voucher could not be unredeemed';
+        // @TODO: extract the (error) message out of the response.
+        return $this->success() ? 'The voucher was unredeemed' : 'The voucher could not be unredeemed';
     }
 }
