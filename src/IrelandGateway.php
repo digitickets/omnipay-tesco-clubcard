@@ -5,6 +5,7 @@ namespace DigiTickets\TescoClubcard;
 use DigiTickets\TescoClubcard\Messages\Ireland\Requests\AuthorizeRequest;
 use DigiTickets\TescoClubcard\Messages\Ireland\Requests\PurchaseRequest;
 use DigiTickets\TescoClubcard\Messages\Ireland\Requests\RedeemRequest;
+use DigiTickets\TescoClubcard\Messages\Ireland\Requests\RefundRequest;
 use DigiTickets\TescoClubcard\Messages\Ireland\Requests\UnredeemRequest;
 use DigiTickets\TescoClubcard\Messages\Ireland\Requests\ValidateRequest;
 use Omnipay\Common\Message\AbstractRequest;

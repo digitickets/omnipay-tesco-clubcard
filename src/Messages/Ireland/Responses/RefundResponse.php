@@ -2,14 +2,16 @@
 
 namespace DigiTickets\TescoClubcard\Messages\Ireland\Responses;
 
-use DigiTickets\TescoClubcard\Messages\Ireland\Requests\RedeemRequest;
+use DigiTickets\TescoClubcard\Messages\Interfaces\RefundResponseInterface;
 use DigiTickets\TescoClubcard\Messages\Ireland\Requests\RefundRequest;
+use DigiTickets\TescoClubcard\Messages\Ireland\Requests\UnredeemRequest;
+use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RequestInterface;
 
 class RefundResponse extends AbstractResponse implements RefundResponseInterface
 {
     /**
-     * @var RedeemRequest
+     * @var UnredeemRequest
      */
     protected $request;
     /**
@@ -17,7 +19,7 @@ class RefundResponse extends AbstractResponse implements RefundResponseInterface
      */
     private $unredeemResponse;
 
-    public function __construct(RequestInterface $request, \SimpleXMLElement $response)
+    public function __construct(RequestInterface $request, UnredeemResponse $response)
     {
         parent::__construct($request, $response);
 
@@ -62,5 +64,16 @@ class RefundResponse extends AbstractResponse implements RefundResponseInterface
     public function getTransactionReference()
     {
         return $this->request->getTransactionReference();
+    }
+
+    /**
+     * Get the raw data array for this message. The format of this varies from gateway to
+     * gateway, but will usually be either an associative array, or a SimpleXMLElement.
+     *
+     * @return mixed
+     */
+    public function getData()
+    {
+        return $this->getCode();
     }
 }

@@ -4,8 +4,10 @@ namespace DigiTickets\TescoClubcard\Messages\Ireland\Requests;
 
 use DigiTickets\TescoClubcard\Messages\Ireland\Responses\PurchaseResponse;
 use DigiTickets\TescoClubcard\Messages\Ireland\Responses\RedeemResponse;
+use DigiTickets\TescoClubcard\Messages\Ireland\Responses\RefundResponse;
+use Omnipay\Common\Message\AbstractRequest;
 
-class RefundRequest extends AuthorizeRequest
+class RefundRequest extends AbstractRequest
 {
     /**
      * @var UnredeemRequest
@@ -21,10 +23,15 @@ class RefundRequest extends AuthorizeRequest
         $this->unredeemRequest = $unredeemRequest;
     }
 
+    public function getData()
+    {
+        return $this->unredeemRequest->getVoucherCode();
+    }
+
     public function sendData($data)
     {
-        /** @var UnredeemResponse $response */
-        $unredeemResponse = $unredeemRequest->send();
+        /** @var UnredeemResponse $unredeemResponse */
+        $unredeemResponse = $this->unredeemRequest->send();
 
         return new RefundResponse($this, $unredeemResponse);
     }
