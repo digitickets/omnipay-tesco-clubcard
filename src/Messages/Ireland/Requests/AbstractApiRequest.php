@@ -50,8 +50,6 @@ abstract class AbstractApiRequest extends AbstractRequest
          */
         $message = $this->buildMessage();
 
-        // @TODO: do all the substitutions - date/time, supplier codes, etc.
-        // @TODO: With tx ids, etc, should we generate them in the constructor and store them in the class?
         $xml = <<<EOT
 <TokenCheck xmlns="http://TescoFreetime.co.uk/">
 <ns1:message><![CDATA[<?xml version="1.0" encoding="utf-16"?>
@@ -90,8 +88,6 @@ EOT;
             $body = new SoapVar($data, XSD_ANYXML);
             // @TODO: Need to tell PHPStorm that $client has a method "TokenCheck".
             $result = $client->TokenCheck($body);
-            // @TODO: Need to handle $result->TokenCheckResult being an empty string.
-            // @TODO: Will need to return my own XML object.
             $resultXml = $result->TokenCheckResult;
             if (empty($resultXml)) {
                 throw new \RuntimeException('Empty response was returned');
