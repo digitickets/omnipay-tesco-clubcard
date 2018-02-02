@@ -60,7 +60,6 @@ abstract class AbstractTescoClubcardGateway extends AbstractGateway
      */
     public function setSupplierCode($supplierCode)
     {
-        error_log('AbstractTescoClubcardGateway - setSupplierCode: '.$supplierCode);
         return $this->setParameter('supplierCode', $supplierCode);
     }
 
@@ -69,8 +68,6 @@ abstract class AbstractTescoClubcardGateway extends AbstractGateway
      */
     public function getSupplierCode()
     {
-        error_log('AbstractTescoClubcardGateway - getSupplierCode: '.$this->getParameter('supplierCode'));
-
         return $this->getParameter('supplierCode');
     }
 
@@ -80,7 +77,6 @@ abstract class AbstractTescoClubcardGateway extends AbstractGateway
      */
     public function setThirdPartyIdentifier($thirdPartyIdentifier)
     {
-        error_log('AbstractTescoClubcardGateway - setThirdPartyIdentifier: '.$thirdPartyIdentifier);
         return $this->setParameter('thirdPartyIdentifier', $thirdPartyIdentifier);
     }
 
@@ -89,10 +85,6 @@ abstract class AbstractTescoClubcardGateway extends AbstractGateway
      */
     public function getThirdPartyIdentifier()
     {
-        error_log(
-            'AbstractTescoClubcardGateway - getThirdPartyIdentifier: '.$this->getParameter('thirdPartyIdentifier')
-        );
-
         return $this->getParameter('thirdPartyIdentifier');
     }
 

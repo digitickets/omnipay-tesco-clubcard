@@ -27,7 +27,6 @@ abstract class AbstractResponse
 
     public function __construct(\stdClass $response)
     {
-        error_log('$response: '.var_export($response, true));
         $this->response = $response;
         $this->init();
     }
@@ -43,7 +42,6 @@ abstract class AbstractResponse
                 $this->tokenDetails = reset($this->response->TokenDetailsList);
             }
         }
-        error_log('Response is valid? '.var_export($this->responseIsValid, true));
     }
 
     /**

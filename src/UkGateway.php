@@ -35,10 +35,7 @@ class UkGateway extends AbstractTescoClubcardGateway
      */
     public function validate($voucherNumber)
     {
-        error_log('/');
-        error_log('validate voucher (Uk): '.$voucherNumber);
         $message = new ValidateMessage($voucherNumber);
-        //error_log('Validate $message: '.var_export($message, true));
         return new ValidateResponse($this->send($message));
     }
 
@@ -79,7 +76,6 @@ class UkGateway extends AbstractTescoClubcardGateway
      */
     private function send(AbstractMessage $message)
     {
-        error_log('Sending a Uk request');
         // Need to substitute all the things in.
         $message = [
             'TransactionID' => $this->generateTransactionId(),
@@ -94,7 +90,6 @@ class UkGateway extends AbstractTescoClubcardGateway
                 ],
             ],
         ];
-        error_log('$message: '.var_export($message, true));
 
         $clientParams = [
             'base_uri' => $this->getUrl(),
@@ -105,17 +100,13 @@ class UkGateway extends AbstractTescoClubcardGateway
             ],
             'http_errors' => false,
         ];
-        error_log('$clientParams: '.var_export($clientParams, true));
         $client = new Client($clientParams);
         $params = [
             'body' => json_encode($message),
         ];
-        error_log('$params: '.var_export($params, true));
         $response = $client->post('ManageToken', $params);
-        error_log('Uk $response: '.var_export($response, true));
 
         $result = json_decode($response->getBody()->getContents());
-        error_log('Response body: '.var_export($result, true));
 
         return $result;
     }

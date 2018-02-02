@@ -19,13 +19,11 @@ abstract class AbstractApiRequest extends AbstractRequest
 
     public function getVoucherCode()
     {
-        error_log('Returning voucher code to: '.$this->getParameter('voucherCode'));
         return $this->getParameter('voucherCode');
     }
 
     public function setVoucherCode($voucherCode)
     {
-        error_log('Setting voucher code to: '.$voucherCode);
         return $this->setParameter('voucherCode', $voucherCode);
     }
 
@@ -47,12 +45,10 @@ abstract class AbstractApiRequest extends AbstractRequest
      */
     public function getData()
     {
-        error_log('getData...');
         /**
          * @var AbstractMessage $message
          */
         $message = $this->buildMessage();
-        error_log('$message: '.var_export($message, true));
 
         // @TODO: do all the substitutions - date/time, supplier codes, etc.
         // @TODO: With tx ids, etc, should we generate them in the constructor and store them in the class?
@@ -86,30 +82,22 @@ EOT;
      */
     public function sendData($data)
     {
-        error_log('sendData... XML: '.$data);
         $options['trace'] = 1;
         $wsdl = 'https://tfoag01.tescofreetime.com/TokenAuthorisationWebService/TokenAuthorise.asmx?wsdl';
 
         try {
             $client = new SoapClient($wsdl, $options);
             $body = new SoapVar($data, XSD_ANYXML);
-            error_log('Got client and body');
-            //error_log('About to call TokenCheck()');
             // @TODO: Need to tell PHPStorm that $client has a method "TokenCheck".
             $result = $client->TokenCheck($body);
             // @TODO: Need to handle $result->TokenCheckResult being an empty string.
             // @TODO: Will need to return my own XML object.
             $resultXml = $result->TokenCheckResult;
-            error_log('$result: '.var_export($resultXml, true));
             if (empty($resultXml)) {
                 throw new \RuntimeException('Empty response was returned');
             }
             $responseXml = simplexml_load_string(mb_convert_encoding($resultXml, 'UTF-16'));
-            //error_log('Response: TransactionResponseCode: '.$responseXml->TransactionResponseCode);
-            //error_log('Response: Response status: '.$responseXml->Response->Status);
-            //error_log('Last request: '.var_export($client->__getLastRequest(), true));
         } catch (\Exception $e) {
-            error_log('Error! '.$e->getMessage());
             $errorXml = <<<EOT
 <?xml version="1.0" encoding="utf-16"?>
 <Error message="{$e->getMessage()}"></Error>
@@ -161,7 +149,6 @@ EOT;
      */
     public function setSupplierCode($supplierCode)
     {
-        error_log('setSupplierCode: '.$supplierCode);
         return $this->setParameter('supplierCode', $supplierCode);
     }
 
@@ -170,8 +157,6 @@ EOT;
      */
     public function getSupplierCode()
     {
-        error_log('getSupplierCode: '.$this->getParameter('supplierCode'));
-
         return $this->getParameter('supplierCode');
     }
 
@@ -180,7 +165,6 @@ EOT;
      */
     public function setThirdPartyIdentifier($thirdPartyIdentifier)
     {
-        error_log('setThirdPartyIdentifier: '.$thirdPartyIdentifier);
         return $this->setParameter('thirdPartyIdentifier', $thirdPartyIdentifier);
     }
 
@@ -189,8 +173,6 @@ EOT;
      */
     public function getThirdPartyIdentifier()
     {
-        error_log('getThirdPartyIdentifier: '.$this->getParameter('thirdPartyIdentifier'));
-
         return $this->getParameter('thirdPartyIdentifier');
     }
 
