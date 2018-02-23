@@ -65,7 +65,7 @@ abstract class AbstractResponse
      */
     protected function get($attribute)
     {
-        if (property_exists($this->responseNode, $attribute)) {
+        if ($this->responseNode && property_exists($this->responseNode, $attribute)) {
             return (string) $this->responseNode->$attribute;
         }
 

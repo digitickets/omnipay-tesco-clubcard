@@ -19,6 +19,12 @@ class ValidateResponse extends AbstractResponse implements ValidateResponseInter
      */
     public function getErrorMessage()
     {
+        // Annoyingly, if the voucher code is not valid, the API response is empty, so we have to
+        // have a special check for it.
+        if (is_null($this->get('Status'))) {
+            return 'Invalid voucher code';
+        }
+
         // Map the status to an error message.
         $map = [
             'NotFound' => 'Voucher was not found',
