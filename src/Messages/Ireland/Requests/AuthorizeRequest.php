@@ -59,12 +59,16 @@ class AuthorizeRequest extends AbstractRequest
         $this->productTypes = [];
     }
 
-    protected function addProductType($productType)
+    protected function addProductType($productType, $voucherCode)
     {
         if (!isset($this->productTypes[$productType])) {
-            $this->productTypes[$productType] = 0;
+            $this->productTypes[$productType] = [
+                'cartItemsRequired' => 0,
+                'voucherCodes' => []
+            ];
         }
-        $this->productTypes[$productType]++;
+        $this->productTypes[$productType]['cartItemsRequired']++;
+        $this->productTypes[$productType]['voucherCodes'][] = $voucherCode;
     }
 
     protected function subtractFromProductTypes($cartItem)
@@ -73,21 +77,21 @@ class AuthorizeRequest extends AbstractRequest
             isset($cartItem['thirdPartyID']) && $cartItem['thirdPartyID'] ? $cartItem['thirdPartyID'] : null;
         if ($thirdPartyID) {
             if (isset($this->productTypes[$thirdPartyID])) {
-                $this->productTypes[$thirdPartyID] -= $cartItem['qty'];
+                $this->productTypes[$thirdPartyID]['cartItemsRequired'] -= $cartItem['qty'];
             }
         }
     }
 
-    protected function anyRemainingProductTypes()
+    protected function getRemainingProductTypes()
     {
         $remaining = array_filter(
             $this->productTypes,
-            function ($productTypeQty) {
-                return $productTypeQty > 0;
+            function ($productTypeData) {
+                return $productTypeData['cartItemsRequired'] > 0;
             }
         );
 
-        return !empty($remaining);
+        return $remaining;
     }
 
     public function getData()
@@ -113,7 +117,7 @@ class AuthorizeRequest extends AbstractRequest
                     throw new \RuntimeException($response->getErrorMessage());
                 }
                 $result[] = ['voucherCode' => $voucherCode, 'value' => $response->getValue()];
-                $this->addProductType($response->getProductType());
+                $this->addProductType($response->getProductType(), $voucherCode);
                 $voucherTotalValue += $response->getValue();
             }
             // Check that there are enough items in the cart for all the voucher's product types.
@@ -122,8 +126,13 @@ class AuthorizeRequest extends AbstractRequest
             foreach ($this->cartItems as $cartItem) {
                 $this->subtractFromProductTypes($cartItem);
             }
-            if ($this->anyRemainingProductTypes()) {
-                return new AuthorizeResponse($this, 'One or more vouchers cannot be assigned to items in your cart');
+            $oversubscribed = $this->getRemainingProductTypes();
+            if (count($oversubscribed)) {
+                return new AuthorizeResponse(
+                    $this,
+                    'One or more vouchers cannot be assigned to items in your cart',
+                    $oversubscribed
+                );
             }
             // Check that the total voucher value is not greater than the cart total.
             if ($voucherTotalValue > $this->cartTotal) {

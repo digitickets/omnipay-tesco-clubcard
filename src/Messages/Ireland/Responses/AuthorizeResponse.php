@@ -20,14 +20,19 @@ class AuthorizeResponse extends AbstractResponse implements AuthorizeResponseInt
      * @var string|null
      */
     protected $responseCode = null;
+    /**
+     * @var array
+     */
+    private $extraData = [];
 
     /**
      * Constructor
      *
      * @param RequestInterface $request the initiating request.
      * @param mixed $data
+     * @param array $extraData
      */
-    public function __construct(RequestInterface $request, $data)
+    public function __construct(RequestInterface $request, $data, $extraData = [])
     {
         parent::__construct($request, $data);
 
@@ -40,6 +45,7 @@ class AuthorizeResponse extends AbstractResponse implements AuthorizeResponseInt
         } else {
             $this->data = [];
             $this->message = $data;
+            $this->extraData = $extraData;
         }
     }
 
@@ -81,5 +87,10 @@ class AuthorizeResponse extends AbstractResponse implements AuthorizeResponseInt
     public function getTransactionReference()
     {
         return json_encode($this->data);
+    }
+
+    public function getOversubscriptionData()
+    {
+        return $this->extraData;
     }
 }
