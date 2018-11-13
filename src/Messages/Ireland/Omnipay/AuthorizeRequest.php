@@ -1,6 +1,6 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\Messages\Ireland\Requests;
+namespace DigiTickets\TescoClubcard\Messages\Ireland\Omnipay;
 
 // @TODO: Could we make them common between the 2 APIs? Ie are they identical?
 use DigiTickets\TescoClubcard\Messages\Ireland\Responses\AuthorizeResponse;

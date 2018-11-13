@@ -1,20 +1,21 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\Messages\Ireland\Requests;
+namespace DigiTickets\TescoClubcard\Messages\Ireland\Voucher;
 
 use DigiTickets\TescoClubcard\Messages\AbstractMessage;
+use DigiTickets\TescoClubcard\Messages\Ireland\Common\AbstractApiRequest;
 use DigiTickets\TescoClubcard\Messages\Ireland\Responses\AbstractResponse;
-use DigiTickets\TescoClubcard\Messages\Ireland\Responses\UnredeemResponse;
-use DigiTickets\TescoClubcard\Messages\UnredeemMessage;
+use DigiTickets\TescoClubcard\Messages\Ireland\Responses\RedeemResponse;
+use DigiTickets\TescoClubcard\Messages\RedeemMessage;
 
-class UnredeemRequest extends AbstractApiRequest
+class RedeemRequest extends AbstractApiRequest
 {
     /**
      * @return AbstractMessage
      */
     protected function buildMessage()
     {
-        return new UnredeemMessage($this->getVoucherCode());
+        return new RedeemMessage($this->getVoucherCode());
     }
 
     /**
@@ -24,6 +25,6 @@ class UnredeemRequest extends AbstractApiRequest
      */
     protected function buildResponse($request, $response)
     {
-        return new UnredeemResponse($request, $response);
+        return new RedeemResponse($request, $response);
     }
 }

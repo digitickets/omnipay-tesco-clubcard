@@ -2,6 +2,7 @@
 
 namespace DigiTickets\TescoClubcard;
 
+use DigiTickets\OmnipayAbstractVoucher\AbstractVoucherGateway;
 use DigiTickets\TescoClubcard\Messages\Interfaces\RedeemResponseInterface;
 use DigiTickets\TescoClubcard\Messages\Interfaces\UnredeemResponseInterface;
 use DigiTickets\TescoClubcard\Messages\Interfaces\ValidateResponseInterface;
@@ -25,14 +26,9 @@ use Omnipay\Common\AbstractGateway;
  * @method RequestInterface deleteCard(array $options = array())        (Optional method)
  *         Delete a stored card
  */
-abstract class AbstractTescoClubcardGateway extends AbstractGateway
+abstract class AbstractTescoClubcardGateway extends AbstractVoucherGateway
 {
-    // These are standard omnipay methods.
-    abstract public function authorize(array $parameters = array());
-    abstract public function purchase(array $parameters = array());
-    abstract public function refund(array $parameters = array());
-
-    // These are the methods that the above methods actually use to communicate with the API.
+    // These are the methods that the standard Omnipay methods actually use to communicate with the API.
     /**
      * @param array $parameters
      * @return ValidateResponseInterface

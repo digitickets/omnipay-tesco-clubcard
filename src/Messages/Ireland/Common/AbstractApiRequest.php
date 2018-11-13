@@ -1,6 +1,6 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\Messages\Ireland\Requests;
+namespace DigiTickets\TescoClubcard\Messages\Ireland\Common;
 
 use DigiTickets\TescoClubcard\Messages\AbstractMessage;
 use Omnipay\Common\Message\AbstractRequest;

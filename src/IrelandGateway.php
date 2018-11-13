@@ -2,12 +2,12 @@
 
 namespace DigiTickets\TescoClubcard;
 
-use DigiTickets\TescoClubcard\Messages\Ireland\Requests\AuthorizeRequest;
-use DigiTickets\TescoClubcard\Messages\Ireland\Requests\PurchaseRequest;
-use DigiTickets\TescoClubcard\Messages\Ireland\Requests\RedeemRequest;
-use DigiTickets\TescoClubcard\Messages\Ireland\Requests\RefundRequest;
-use DigiTickets\TescoClubcard\Messages\Ireland\Requests\UnredeemRequest;
-use DigiTickets\TescoClubcard\Messages\Ireland\Requests\ValidateRequest;
+use DigiTickets\TescoClubcard\Messages\Ireland\Omnipay\AuthorizeRequest;
+use DigiTickets\TescoClubcard\Messages\Ireland\Omnipay\PurchaseRequest;
+use DigiTickets\TescoClubcard\Messages\Ireland\Omnipay\RefundRequest;
+use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\RedeemRequest;
+use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\UnredeemRequest;
+use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\ValidateRequest;
 use Omnipay\Common\Message\AbstractRequest;
 
 class IrelandGateway extends AbstractTescoClubcardGateway

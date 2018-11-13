@@ -1,6 +1,6 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\Messages\Ireland\Responses;
+namespace DigiTickets\TescoClubcard\Messages\Ireland\Omnipay;
 
 use DigiTickets\TescoClubcard\Messages\Interfaces\PurchaseResponseInterface;
 use Omnipay\Common\Message\RequestInterface;
