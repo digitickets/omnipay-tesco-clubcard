@@ -29,4 +29,9 @@ error_log('TEN');
 error_log('$response: '.print_r($response, true));
         return new ValidateResponse($request, $response);
     }
+
+    protected function getListenerAction(): string
+    {
+        return 'validateRequestSend';
+    }
 }

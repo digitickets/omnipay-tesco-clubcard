@@ -27,4 +27,9 @@ class RedeemRequest extends AbstractApiRequest
     {
         return new RedeemResponse($request, $response);
     }
+
+    protected function getListenerAction(): string
+    {
+        return 'redeemRequestSend';
+    }
 }

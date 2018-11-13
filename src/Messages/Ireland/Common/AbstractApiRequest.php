@@ -17,6 +17,16 @@ abstract class AbstractApiRequest extends AbstractRequest
         return 'https://tfoag01.tescofreetime.com/TokenAuthorisationWebService/TokenAuthorise.asmx';
     }
 
+    public function setGateway($value)
+    {
+        $this->setParameter('gateway', $value);
+    }
+
+    public function getGateway()
+    {
+        return $this->getParameter('gateway');
+    }
+
     public function getVoucherCode()
     {
         return $this->getParameter('voucherCode');
@@ -39,6 +49,12 @@ abstract class AbstractApiRequest extends AbstractRequest
      * @return AbstractRemoteResponse
      */
     abstract protected function buildResponse($request, $response);
+
+    /**
+     * Method to return the action for the listener.
+     * @return string
+     */
+    abstract protected function getListenerAction(): string;
 
     /**
      * @return mixed
@@ -102,6 +118,12 @@ EOT;
             $responseXml = simplexml_load_string(mb_convert_encoding($errorXml, 'UTF-16'));
         }
 error_log('About to build and return the response');
+
+        // Send all the information to any listeners.
+        foreach ($this->getGateway()->getListeners() as $listener) {
+error_log('[Tesco Driver] Next listener');
+            $listener->update($this->getListenerAction(), $responseXml);
+        }
 
         return $this->response = $this->buildResponse($this, $responseXml);
     }

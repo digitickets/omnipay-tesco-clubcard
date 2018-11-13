@@ -27,4 +27,9 @@ class UnredeemRequest extends AbstractApiRequest
     {
         return new UnredeemResponse($request, $response);
     }
+
+    protected function getListenerAction(): string
+    {
+        return 'UnredeemRequestSend';
+    }
 }

@@ -44,6 +44,7 @@ error_log('Generating an authorize request');
     public function validate(array $parameters = array())
     {
 error_log('Generating a validate request');
+        $parameters['gateway'] = $this;
         return $this->createRequest(ValidateRequest::class, $parameters);
     }
 
@@ -53,6 +54,7 @@ error_log('Generating a validate request');
      */
     public function redeem(array $parameters = array())
     {
+        $parameters['gateway'] = $this;
         return $this->createRequest(RedeemRequest::class, $parameters);
     }
 
@@ -62,6 +64,7 @@ error_log('Generating a validate request');
      */
     public function unredeem(array $parameters = array())
     {
+        $parameters['gateway'] = $this;
         return $this->createRequest(UnredeemRequest::class, $parameters);
     }
 }
