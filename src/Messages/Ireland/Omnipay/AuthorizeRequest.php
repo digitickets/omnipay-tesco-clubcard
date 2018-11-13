@@ -3,8 +3,8 @@
 namespace DigiTickets\TescoClubcard\Messages\Ireland\Omnipay;
 
 // @TODO: Could we make them common between the 2 APIs? Ie are they identical?
-use DigiTickets\TescoClubcard\Messages\Ireland\Responses\AuthorizeResponse;
-use DigiTickets\TescoClubcard\Messages\Ireland\Responses\ValidateResponse;
+use DigiTickets\TescoClubcard\Messages\Ireland\Omnipay\AuthorizeResponse;
+use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\ValidateResponse;
 use Omnipay\Common\Message\AbstractRequest;
 
 class AuthorizeRequest extends AbstractRequest
@@ -101,6 +101,7 @@ class AuthorizeRequest extends AbstractRequest
 
     public function sendData($data)
     {
+error_log('AuthorizeRequest::sendData...');
         $this->resetProductTypes();
         $result = [];
         $voucherTotalValue = 0;
@@ -109,6 +110,7 @@ class AuthorizeRequest extends AbstractRequest
             // validate() method, then checks that the set of vouchers is compatible with the purchase
             // items.
             foreach ($data as $voucherCode) {
+error_log('Next voucher code: '.$voucherCode);
                 $validateRequest = clone $this->validateRequest;
                 $validateRequest->setVoucherCode($voucherCode);
                 /** @var ValidateResponse $response */

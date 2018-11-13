@@ -2,9 +2,11 @@
 
 namespace DigiTickets\TescoClubcard\Messages\Ireland\Voucher;
 
+use DigiTickets\OmnipayAbstractVoucher\VoucherResponseInterface;
+use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RequestInterface;
 
-abstract class AbstractResponse
+abstract class AbstractVoucherResponse extends AbstractResponse implements VoucherResponseInterface
 {
     const RESPONSE_CODE_FAILURE = 'Failure';
     const RESPONSE_CODE_SUCCESS = 'Success';
@@ -79,10 +81,7 @@ abstract class AbstractResponse
      */
     abstract protected function getSuccessStatusCode();
 
-    /**
-     * @return bool
-     */
-    public function success()
+    public function isSuccessful(): bool
     {
         // @TODO: Should it check things like expiry date?
         return $this->responseIsValid && $this->get('Status') == $this->getSuccessStatusCode();

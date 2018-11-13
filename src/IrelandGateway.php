@@ -19,6 +19,7 @@ class IrelandGateway extends AbstractTescoClubcardGateway
 
     public function authorize(array $parameters = array())
     {
+error_log('Generating an authorize request');
         $parameters['validateRequest'] = $this->validate($parameters);
         return $this->createRequest(AuthorizeRequest::class, $parameters);
     }
@@ -42,6 +43,7 @@ class IrelandGateway extends AbstractTescoClubcardGateway
      */
     public function validate(array $parameters = array())
     {
+error_log('Generating a validate request');
         return $this->createRequest(ValidateRequest::class, $parameters);
     }
 

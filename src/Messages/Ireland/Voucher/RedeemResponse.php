@@ -2,9 +2,7 @@
 
 namespace DigiTickets\TescoClubcard\Messages\Ireland\Voucher;
 
-use DigiTickets\TescoClubcard\Messages\Interfaces\RedeemResponseInterface;
-
-class RedeemResponse extends AbstractResponse implements RedeemResponseInterface
+class RedeemResponse extends AbstractVoucherResponse
 {
     /**
      * @return string

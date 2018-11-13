@@ -28,27 +28,6 @@ use Omnipay\Common\AbstractGateway;
  */
 abstract class AbstractTescoClubcardGateway extends AbstractVoucherGateway
 {
-    // These are the methods that the standard Omnipay methods actually use to communicate with the API.
-    /**
-     * @param array $parameters
-     * @return ValidateResponseInterface
-     */
-    abstract public function validate(array $parameters = array());
-
-    /**
-     * @param array $parameters
-     * @return RedeemResponseInterface
-     */
-    abstract public function redeem(array $parameters = array());
-
-    /**
-     * @param array $parameters
-     * @return UnredeemResponseInterface
-     */
-    abstract public function unredeem(array $parameters = array());
-
-    abstract public function getName();
-
     // Methods to set/get the various credentials.
     /**
      * @param string $supplierCode

@@ -80,6 +80,7 @@ EOT;
      */
     public function sendData($data)
     {
+error_log('AbstractApiRequest::sendData');
         $options['trace'] = 1;
         $wsdl = 'https://tfoag01.tescofreetime.com/TokenAuthorisationWebService/TokenAuthorise.asmx?wsdl';
 
@@ -100,6 +101,7 @@ EOT;
 EOT;
             $responseXml = simplexml_load_string(mb_convert_encoding($errorXml, 'UTF-16'));
         }
+error_log('About to build and return the response');
 
         return $this->response = $this->buildResponse($this, $responseXml);
     }

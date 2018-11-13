@@ -2,8 +2,8 @@
 
 namespace DigiTickets\TescoClubcard\Messages\Ireland\Omnipay;
 
-use DigiTickets\TescoClubcard\Messages\Ireland\Responses\PurchaseResponse;
-use DigiTickets\TescoClubcard\Messages\Ireland\Responses\RedeemResponse;
+use DigiTickets\TescoClubcard\Messages\Ireland\Omnipay\PurchaseResponse;
+use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\RedeemResponse;
 
 /**
  * Purchase request does everything that AuthorizeRequest does, plus if it's successful, it actually

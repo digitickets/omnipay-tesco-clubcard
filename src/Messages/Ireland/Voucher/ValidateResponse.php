@@ -2,9 +2,7 @@
 
 namespace DigiTickets\TescoClubcard\Messages\Ireland\Voucher;
 
-use DigiTickets\TescoClubcard\Messages\Interfaces\ValidateResponseInterface;
-
-class ValidateResponse extends AbstractResponse implements ValidateResponseInterface
+class ValidateResponse extends AbstractVoucherResponse
 {
     /**
      * @return string
