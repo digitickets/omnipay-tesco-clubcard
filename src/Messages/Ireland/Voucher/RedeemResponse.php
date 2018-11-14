@@ -2,6 +2,8 @@
 
 namespace DigiTickets\TescoClubcard\Messages\Ireland\Voucher;
 
+use DigiTickets\TescoClubcard\Messages\Ireland\Common\AbstractVoucherResponse;
+
 class RedeemResponse extends AbstractVoucherResponse
 {
     /**

@@ -2,51 +2,24 @@
 
 namespace DigiTickets\TescoClubcard\Messages\Ireland\Omnipay;
 
-use DigiTickets\TescoClubcard\Messages\Ireland\Omnipay\PurchaseResponse;
-use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\RedeemResponse;
+use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\RedeemRequest;
 
-/**
- * Purchase request does everything that AuthorizeRequest does, plus if it's successful, it actually
- * redeems the vouchers.
- */
-class PurchaseRequest extends AuthorizeRequest
+class PurchaseRequest extends RedeemRequest
 {
     /**
-     * @var RedeemRequest
+     * @param RequestInterface $request
+     * @param mixed $response
+     * @return AbstractResponse
      */
-    private $redeemRequest;
-
-    /**
-     * Store the instance of the redeem request, which we'll use to redeem each voucher.
-     * @param $redeemRequest
-     */
-    public function setRedeemRequest($redeemRequest)
+    protected function buildResponse($request, $response)
     {
-        $this->redeemRequest = $redeemRequest;
+error_log('Building a PurchaseResponse');
+        return new PurchaseResponse($request, $response);
     }
 
-    public function sendData($data)
+    protected function getListenerAction(): string
     {
-        // Do all the authorisation stuff.
-        $authorizeResponse = parent::sendData($data);
-
-        // If authorisation was successful, actually redeem the vouchers.
-        if (!$authorizeResponse->isSuccessful()) {
-            return new PurchaseResponse($this, 'Authorization failed: '.$authorizeResponse->getMessage());
-        }
-
-        foreach ($data as $voucherCode) {
-            $redeemRequest = clone $this->redeemRequest;
-            $redeemRequest->setVoucherCode($voucherCode);
-            /** @var RedeemResponse $response */
-            $response = $redeemRequest->send();
-            if (!$response->success()) {
-                return new PurchaseResponse($this, 'Failed to redeem all the vouchers');
-            }
-        }
-
-        $purchaseResponse = new PurchaseResponse($this, $authorizeResponse->getData());
-
-        return $purchaseResponse;
+error_log('Listener action is purchaseRequestSend');
+        return 'purchaseRequestSend';
     }
 }

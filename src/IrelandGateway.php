@@ -17,23 +17,30 @@ class IrelandGateway extends AbstractTescoClubcardGateway
         return 'Tesco Clubcard Boost';
     }
 
+    protected function createRequest($class, array $parameters)
+    {
+        $parameters['gateway'] = $this;
+        
+        return parent::createRequest($class, $parameters);
+    }
+
     public function authorize(array $parameters = array())
     {
 error_log('Generating an authorize request');
-        $parameters['validateRequest'] = $this->validate($parameters);
+        $parameters['validateRequest'] = $this->validate($parameters); // @TODO: Remove?
         return $this->createRequest(AuthorizeRequest::class, $parameters);
     }
 
     public function purchase(array $parameters = array())
     {
-        $parameters['validateRequest'] = $this->validate($parameters);
-        $parameters['redeemRequest'] = $this->redeem($parameters);
+        $parameters['validateRequest'] = $this->validate($parameters); // @TODO: Remove?
+        $parameters['redeemRequest'] = $this->redeem($parameters); // @TODO: Remove?
         return $this->createRequest(PurchaseRequest::class, $parameters);
     }
 
     public function refund(array $parameters = array())
     {
-        $parameters['unredeemRequest'] = $this->unredeem($parameters);
+        $parameters['unredeemRequest'] = $this->unredeem($parameters); // @TODO: Remove?
         return $this->createRequest(RefundRequest::class, $parameters);
     }
 
@@ -44,7 +51,6 @@ error_log('Generating an authorize request');
     public function validate(array $parameters = array())
     {
 error_log('Generating a validate request');
-        $parameters['gateway'] = $this;
         return $this->createRequest(ValidateRequest::class, $parameters);
     }
 
@@ -54,7 +60,6 @@ error_log('Generating a validate request');
      */
     public function redeem(array $parameters = array())
     {
-        $parameters['gateway'] = $this;
         return $this->createRequest(RedeemRequest::class, $parameters);
     }
 
@@ -64,7 +69,6 @@ error_log('Generating a validate request');
      */
     public function unredeem(array $parameters = array())
     {
-        $parameters['gateway'] = $this;
         return $this->createRequest(UnredeemRequest::class, $parameters);
     }
 }

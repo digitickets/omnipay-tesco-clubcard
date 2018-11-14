@@ -1,6 +1,6 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\Messages\Ireland\Voucher;
+namespace DigiTickets\TescoClubcard\Messages\Ireland\Common;
 
 use DigiTickets\OmnipayAbstractVoucher\VoucherResponseInterface;
 use Omnipay\Common\Message\AbstractResponse;
@@ -43,8 +43,14 @@ abstract class AbstractVoucherResponse extends AbstractResponse implements Vouch
      */
     private $responseNode;
 
+    /**
+     * @var string|null
+     */
+    private $message;
+
     public function __construct(RequestInterface $request, \SimpleXMLElement $response)
     {
+error_log('$response was: '.var_export($response, true));
         $this->request = $request;
         $this->responseXml = $response;
 
@@ -53,11 +59,14 @@ abstract class AbstractVoucherResponse extends AbstractResponse implements Vouch
 
     private function init()
     {
+        $this->message = 'Unexpected response was returned';
         // Grab the first (and only) response node within the response object, and store it in the class.
         $responseNodes = $this->responseXml->xpath('//Response');
         if (count($responseNodes)) {
             $this->responseNode = array_shift($responseNodes);
-            $this->responseIsValid = $this->get('ResponseCode') == self::RESPONSE_CODE_SUCCESS;
+            $responseCode = $this->get('ResponseCode');
+            $this->responseIsValid = $responseCode == self::RESPONSE_CODE_SUCCESS;
+            $this->message = $this->responseIsValid ? null : $responseCode; // For now, the error message is the response code, eg, "StatusChangeFail".
         }
     }
 
@@ -85,5 +94,15 @@ abstract class AbstractVoucherResponse extends AbstractResponse implements Vouch
     {
         // @TODO: Should it check things like expiry date?
         return $this->responseIsValid && $this->get('Status') == $this->getSuccessStatusCode();
+    }
+
+    /**
+     * Response Message
+     *
+     * @return null|string A response message from the payment gateway
+     */
+    public function getMessage()
+    {
+        return $this->message;
     }
 }

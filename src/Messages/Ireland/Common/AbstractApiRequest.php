@@ -117,7 +117,6 @@ error_log('AbstractApiRequest::sendData');
 EOT;
             $responseXml = simplexml_load_string(mb_convert_encoding($errorXml, 'UTF-16'));
         }
-error_log('About to build and return the response');
 
         // Send all the information to any listeners.
         foreach ($this->getGateway()->getListeners() as $listener) {
@@ -125,6 +124,7 @@ error_log('[Tesco Driver] Next listener');
             $listener->update($this->getListenerAction(), $responseXml);
         }
 
+error_log('About to build and return the response');
         return $this->response = $this->buildResponse($this, $responseXml);
     }
 
