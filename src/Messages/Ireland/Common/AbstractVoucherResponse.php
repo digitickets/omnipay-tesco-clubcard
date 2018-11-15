@@ -67,6 +67,16 @@ error_log('$response was: '.var_export($response, true));
             $responseCode = $this->get('ResponseCode');
             $this->responseIsValid = $responseCode == self::RESPONSE_CODE_SUCCESS;
             $this->message = $this->responseIsValid ? null : $responseCode; // For now, the error message is the response code, eg, "StatusChangeFail".
+            // Check the expiry date - the response comes back with everything valid, even if the voucher has expired.
+            $expiryDate = $this->get('ExpiryDate');
+            if ($expiryDate) {
+                /** @var \DateTime $expiryDateObject */
+                $expiryDateObject = \DateTime::createFromFormat('d/m/Y H:i:s', $expiryDate);
+                if ($expiryDateObject->getTimestamp() < time()) {
+                    $this->responseIsValid = false;
+                    $this->message = 'Voucher expired at '.$expiryDateObject->format('Y-m-d H:i:s');
+                }
+            }
         }
     }
 
