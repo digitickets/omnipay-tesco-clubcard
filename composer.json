@@ -32,6 +32,7 @@
     }
   },
   "require": {
+    "digitickets/omnipay-abstract-voucher": "@dev",
     "omnipay/common": "~2.0"
   },
   "require-dev": {
