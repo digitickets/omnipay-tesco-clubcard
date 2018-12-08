@@ -1,6 +1,6 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\Messages\Ireland\Requests;
+namespace DigiTickets\TescoClubcard\Messages\Ireland\Common;
 
 use DigiTickets\TescoClubcard\Messages\AbstractMessage;
 use Omnipay\Common\Message\AbstractRequest;
@@ -15,6 +15,16 @@ abstract class AbstractApiRequest extends AbstractRequest
     public function getUrl()
     {
         return 'https://tfoag01.tescofreetime.com/TokenAuthorisationWebService/TokenAuthorise.asmx';
+    }
+
+    public function setGateway($value)
+    {
+        $this->setParameter('gateway', $value);
+    }
+
+    public function getGateway()
+    {
+        return $this->getParameter('gateway');
     }
 
     public function getVoucherCode()
@@ -39,6 +49,12 @@ abstract class AbstractApiRequest extends AbstractRequest
      * @return AbstractRemoteResponse
      */
     abstract protected function buildResponse($request, $response);
+
+    /**
+     * Method to return the action for the listener.
+     * @return string
+     */
+    abstract protected function getListenerAction(): string;
 
     /**
      * @return mixed
@@ -80,6 +96,7 @@ EOT;
      */
     public function sendData($data)
     {
+error_log('AbstractApiRequest::sendData');
         $options['trace'] = 1;
         $wsdl = 'https://tfoag01.tescofreetime.com/TokenAuthorisationWebService/TokenAuthorise.asmx?wsdl';
 
@@ -101,6 +118,13 @@ EOT;
             $responseXml = simplexml_load_string(mb_convert_encoding($errorXml, 'UTF-16'));
         }
 
+        // Send all the information to any listeners.
+        foreach ($this->getGateway()->getListeners() as $listener) {
+error_log('[Tesco Driver] Next listener');
+            $listener->update($this->getListenerAction(), $responseXml);
+        }
+
+error_log('About to build and return the response');
         return $this->response = $this->buildResponse($this, $responseXml);
     }
 

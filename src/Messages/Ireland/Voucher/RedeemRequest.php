@@ -1,10 +1,11 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\Messages\Ireland\Requests;
+namespace DigiTickets\TescoClubcard\Messages\Ireland\Voucher;
 
 use DigiTickets\TescoClubcard\Messages\AbstractMessage;
-use DigiTickets\TescoClubcard\Messages\Ireland\Responses\AbstractResponse;
-use DigiTickets\TescoClubcard\Messages\Ireland\Responses\RedeemResponse;
+use DigiTickets\TescoClubcard\Messages\Ireland\Common\AbstractApiRequest;
+use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\AbstractResponse;
+use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\RedeemResponse;
 use DigiTickets\TescoClubcard\Messages\RedeemMessage;
 
 class RedeemRequest extends AbstractApiRequest
@@ -25,5 +26,10 @@ class RedeemRequest extends AbstractApiRequest
     protected function buildResponse($request, $response)
     {
         return new RedeemResponse($request, $response);
+    }
+
+    protected function getListenerAction(): string
+    {
+        return 'redeemRequestSend';
     }
 }

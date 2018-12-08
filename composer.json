@@ -17,7 +17,7 @@
   "authors": [
     {
       "name": "Glenn Jenkins",
-      "email": "pedanticantic@gmail.com",
+      "email": "glenn.jenkins@digitickets.co.uk",
       "role": "Developer"
     }
   ],
@@ -32,6 +32,7 @@
     }
   },
   "require": {
+    "digitickets/omnipay-abstract-voucher": "^1.0",
     "omnipay/common": "~2.0"
   },
   "require-dev": {

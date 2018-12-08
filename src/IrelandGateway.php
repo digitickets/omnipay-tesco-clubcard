@@ -2,12 +2,12 @@
 
 namespace DigiTickets\TescoClubcard;
 
-use DigiTickets\TescoClubcard\Messages\Ireland\Requests\AuthorizeRequest;
-use DigiTickets\TescoClubcard\Messages\Ireland\Requests\PurchaseRequest;
-use DigiTickets\TescoClubcard\Messages\Ireland\Requests\RedeemRequest;
-use DigiTickets\TescoClubcard\Messages\Ireland\Requests\RefundRequest;
-use DigiTickets\TescoClubcard\Messages\Ireland\Requests\UnredeemRequest;
-use DigiTickets\TescoClubcard\Messages\Ireland\Requests\ValidateRequest;
+use DigiTickets\TescoClubcard\Messages\Ireland\Omnipay\AuthorizeRequest;
+use DigiTickets\TescoClubcard\Messages\Ireland\Omnipay\PurchaseRequest;
+use DigiTickets\TescoClubcard\Messages\Ireland\Omnipay\RefundRequest;
+use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\RedeemRequest;
+use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\UnredeemRequest;
+use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\ValidateRequest;
 use Omnipay\Common\Message\AbstractRequest;
 
 class IrelandGateway extends AbstractTescoClubcardGateway
@@ -17,22 +17,30 @@ class IrelandGateway extends AbstractTescoClubcardGateway
         return 'Tesco Clubcard Boost';
     }
 
+    protected function createRequest($class, array $parameters)
+    {
+        $parameters['gateway'] = $this;
+        
+        return parent::createRequest($class, $parameters);
+    }
+
     public function authorize(array $parameters = array())
     {
-        $parameters['validateRequest'] = $this->validate($parameters);
+error_log('Generating an authorize request');
+        $parameters['validateRequest'] = $this->validate($parameters); // @TODO: Remove?
         return $this->createRequest(AuthorizeRequest::class, $parameters);
     }
 
     public function purchase(array $parameters = array())
     {
-        $parameters['validateRequest'] = $this->validate($parameters);
-        $parameters['redeemRequest'] = $this->redeem($parameters);
+        $parameters['validateRequest'] = $this->validate($parameters); // @TODO: Remove?
+        $parameters['redeemRequest'] = $this->redeem($parameters); // @TODO: Remove?
         return $this->createRequest(PurchaseRequest::class, $parameters);
     }
 
     public function refund(array $parameters = array())
     {
-        $parameters['unredeemRequest'] = $this->unredeem($parameters);
+        $parameters['unredeemRequest'] = $this->unredeem($parameters); // @TODO: Remove?
         return $this->createRequest(RefundRequest::class, $parameters);
     }
 
@@ -42,6 +50,7 @@ class IrelandGateway extends AbstractTescoClubcardGateway
      */
     public function validate(array $parameters = array())
     {
+error_log('Generating a validate request');
         return $this->createRequest(ValidateRequest::class, $parameters);
     }
 

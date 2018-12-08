@@ -4,6 +4,8 @@
 
 Omnipay implementation Tesco Clubcard voucher redemption. Obviously it's not a payment gateway, but it behaves in a similar way.
 
+Note: we have recently refactored this driver but haven't been able to test it fully (no available voucher codes).
+
 [![Build Status](https://travis-ci.org/pedanticantic/omnipay-tesco-clubcard.png?branch=master)](https://travis-ci.org/pedanticantic/omnipay-tesco-clubcard)
 [![Latest Stable Version](https://poser.pugx.org/pedanticantic/omnipay-tesco-clubcard/version.png)](https://packagist.org/packages/omnipay/tesco-clubcard)
 [![Total Downloads](https://poser.pugx.org/pedanticantic/omnipay-tesco-clubcard/d/total.png)](https://packagist.org/packages/pedanticantic/omnipay-tesco-clubcard)
@@ -39,9 +41,7 @@ Currently, the UK driver methods are only stubs.
 
 ## Basic Usage
 
-TBC
-
-(Basically: pass in all vouchers entered by user. The whole set is validated, and checked against the order.)
+TBC (but basically call the standard Omnipay methods when you're treating the operation as a payment and the voucher methods when you're treating the operation like a voucher)
 
 For general Omnipay usage instructions, please see the main [Omnipay](https://github.com/omnipay/omnipay)
 repository.

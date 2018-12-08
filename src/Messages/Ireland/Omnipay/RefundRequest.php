@@ -1,10 +1,10 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\Messages\Ireland\Requests;
+namespace DigiTickets\TescoClubcard\Messages\Ireland\Omnipay;
 
-use DigiTickets\TescoClubcard\Messages\Ireland\Responses\PurchaseResponse;
-use DigiTickets\TescoClubcard\Messages\Ireland\Responses\RedeemResponse;
-use DigiTickets\TescoClubcard\Messages\Ireland\Responses\RefundResponse;
+use DigiTickets\TescoClubcard\Messages\Ireland\Omnipay\PurchaseResponse;
+use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\RedeemResponse;
+use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\RefundResponse;
 use Omnipay\Common\Message\AbstractRequest;
 
 class RefundRequest extends AbstractRequest
