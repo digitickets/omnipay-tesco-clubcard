@@ -41,9 +41,7 @@ Currently, the UK driver methods are only stubs.
 
 ## Basic Usage
 
-TBC
-
-(Basically: pass in all vouchers entered by user. The whole set is validated, and checked against the order.)
+TBC (but basically call the standard Omnipay methods when you're treating the operation as a payment and/or the voucher methods when you're treating the operation like a voucher)
 
 For general Omnipay usage instructions, please see the main [Omnipay](https://github.com/omnipay/omnipay)
 repository.
