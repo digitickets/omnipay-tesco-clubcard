@@ -13,13 +13,11 @@ class AuthorizeRequest extends ValidateRequest
      */
     protected function buildResponse($request, $response)
     {
-error_log('Building an AuthorizeResponse');
         return new AuthorizeResponse($request, $response);
     }
 
     protected function getListenerAction(): string
     {
-error_log('Listener action is authorizeRequestSend');
         return 'authorizeRequestSend';
     }
 }

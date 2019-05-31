@@ -3,8 +3,8 @@
 namespace DigiTickets\TescoClubcard\Messages\Ireland\Omnipay;
 
 use DigiTickets\TescoClubcard\Messages\Interfaces\RefundResponseInterface;
-use DigiTickets\TescoClubcard\Messages\Ireland\Omnipay\RefundRequest;
 use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\UnredeemRequest;
+use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\UnredeemResponse;
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RequestInterface;
 
@@ -33,7 +33,7 @@ class RefundResponse extends AbstractResponse implements RefundResponseInterface
      */
     public function isSuccessful()
     {
-        return $this->unredeemResponse->success();
+        return $this->unredeemResponse->isSuccessful();
     }
 
     /**

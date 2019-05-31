@@ -48,9 +48,13 @@ abstract class AbstractVoucherResponse extends AbstractResponse implements Vouch
      */
     private $message;
 
+    /**
+     * @var string|null
+     */
+    private $alphaNumericID;
+
     public function __construct(RequestInterface $request, \SimpleXMLElement $response)
     {
-error_log('$response was: '.var_export($response, true));
         $this->request = $request;
         $this->responseXml = $response;
 
@@ -60,23 +64,35 @@ error_log('$response was: '.var_export($response, true));
     private function init()
     {
         $this->message = 'Unexpected response was returned';
+        $this->alphaNumericID = null;
+
         // Grab the first (and only) response node within the response object, and store it in the class.
         $responseNodes = $this->responseXml->xpath('//Response');
         if (count($responseNodes)) {
             $this->responseNode = array_shift($responseNodes);
             $responseCode = $this->get('ResponseCode');
             $this->responseIsValid = $responseCode == self::RESPONSE_CODE_SUCCESS;
-            $this->message = $this->responseIsValid ? null : $responseCode; // For now, the error message is the response code, eg, "StatusChangeFail".
-            // Check the expiry date - the response comes back with everything valid, even if the voucher has expired.
-            $expiryDate = $this->get('ExpiryDate');
-            if ($expiryDate) {
-                /** @var \DateTime $expiryDateObject */
-                $expiryDateObject = \DateTime::createFromFormat('d/m/Y H:i:s', $expiryDate);
-                if ($expiryDateObject->getTimestamp() < time()) {
-                    $this->responseIsValid = false;
-                    $this->message = 'Voucher expired at '.$expiryDateObject->format('Y-m-d H:i:s');
+            if ($this->responseIsValid) {
+                // Check the status.
+                if ($this->get('Status') == $this->getSuccessStatusCode()) {
+                    $this->message = $responseCode;
+                    // Check the expiry date - the response comes back with everything valid, even if the voucher has expired.
+                    $expiryDate = $this->get('ExpiryDate');
+                    if ($expiryDate) {
+                        /** @var \DateTime $expiryDateObject */
+                        $expiryDateObject = \DateTime::createFromFormat('d/m/Y H:i:s', $expiryDate);
+                        if ($expiryDateObject->getTimestamp() < time()) {
+                            $this->responseIsValid = false;
+                            $this->message = 'Voucher expired at '.$expiryDateObject->format('Y-m-d H:i:s');
+                        }
+                    }
+                } else {
+                    $this->message = $this->buildErrorMessage($this->get('Status'));
                 }
+            } else {
+                $this->message = $responseCode; // For now, the error message is the response code, eg, "StatusChangeFail".
             }
+            $this->alphaNumericID = $this->get('AlphaNumericID');
         }
     }
 
@@ -114,5 +130,35 @@ error_log('$response was: '.var_export($response, true));
     public function getMessage()
     {
         return $this->message;
+    }
+
+    public function getTransactionReference()
+    {
+        return $this->alphaNumericID;
+    }
+
+    private function buildErrorMessage($statusCode)
+    {
+        switch ($statusCode) {
+            case self::STATUS_REDEEMED:
+                return 'Voucher has already been redeemed - cannot use';
+                break;
+            case self::STATUS_CANCELLED:
+            case self::STATUS_INVOICED:
+                return 'Voucher has been '.strtolower($statusCode);
+                break;
+            case self::STATUS_EXPIRED:
+                return 'Voucher has expired';
+                break;
+            case self::STATUS_NOT_FOUND:
+                return 'Voucher was not found';
+                break;
+            case self::STATUS_ACTIVE:
+                return 'Voucher is currently active';
+                break;
+            default:
+                return $statusCode;
+                break;
+        }
     }
 }
