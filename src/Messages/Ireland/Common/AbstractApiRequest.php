@@ -96,7 +96,6 @@ EOT;
      */
     public function sendData($data)
     {
-error_log('AbstractApiRequest::sendData');
         $options['trace'] = 1;
         $wsdl = 'https://tfoag01.tescofreetime.com/TokenAuthorisationWebService/TokenAuthorise.asmx?wsdl';
 
@@ -120,11 +119,9 @@ EOT;
 
         // Send all the information to any listeners.
         foreach ($this->getGateway()->getListeners() as $listener) {
-error_log('[Tesco Driver] Next listener');
             $listener->update($this->getListenerAction(), $responseXml);
         }
 
-error_log('About to build and return the response');
         return $this->response = $this->buildResponse($this, $responseXml);
     }
 

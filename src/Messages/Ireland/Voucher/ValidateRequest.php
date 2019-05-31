@@ -25,8 +25,6 @@ class ValidateRequest extends AbstractApiRequest
      */
     protected function buildResponse($request, $response)
     {
-error_log('TEN');
-error_log('$response: '.print_r($response, true));
         return new ValidateResponse($request, $response);
     }
 

@@ -13,13 +13,11 @@ class PurchaseRequest extends RedeemRequest
      */
     protected function buildResponse($request, $response)
     {
-error_log('Building a PurchaseResponse');
         return new PurchaseResponse($request, $response);
     }
 
     protected function getListenerAction(): string
     {
-error_log('Listener action is purchaseRequestSend');
         return 'purchaseRequestSend';
     }
 }
