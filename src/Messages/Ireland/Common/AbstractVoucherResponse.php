@@ -48,6 +48,11 @@ abstract class AbstractVoucherResponse extends AbstractResponse implements Vouch
      */
     private $message;
 
+    /**
+     * @var string|null
+     */
+    private $alphaNumericID;
+
     public function __construct(RequestInterface $request, \SimpleXMLElement $response)
     {
         $this->request = $request;
@@ -59,6 +64,8 @@ abstract class AbstractVoucherResponse extends AbstractResponse implements Vouch
     private function init()
     {
         $this->message = 'Unexpected response was returned';
+        $this->alphaNumericID = null;
+
         // Grab the first (and only) response node within the response object, and store it in the class.
         $responseNodes = $this->responseXml->xpath('//Response');
         if (count($responseNodes)) {
@@ -68,6 +75,7 @@ abstract class AbstractVoucherResponse extends AbstractResponse implements Vouch
             if ($this->responseIsValid) {
                 // Check the status.
                 if ($this->get('Status') == $this->getSuccessStatusCode()) {
+                    $this->message = $responseCode;
                     // Check the expiry date - the response comes back with everything valid, even if the voucher has expired.
                     $expiryDate = $this->get('ExpiryDate');
                     if ($expiryDate) {
@@ -84,7 +92,7 @@ abstract class AbstractVoucherResponse extends AbstractResponse implements Vouch
             } else {
                 $this->message = $responseCode; // For now, the error message is the response code, eg, "StatusChangeFail".
             }
-
+            $this->alphaNumericID = $this->get('AlphaNumericID');
         }
     }
 
@@ -122,6 +130,11 @@ abstract class AbstractVoucherResponse extends AbstractResponse implements Vouch
     public function getMessage()
     {
         return $this->message;
+    }
+
+    public function getTransactionReference()
+    {
+        return $this->alphaNumericID;
     }
 
     private function buildErrorMessage($statusCode)
