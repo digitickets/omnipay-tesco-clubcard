@@ -3,6 +3,9 @@
 namespace DigiTickets\TescoClubcard;
 
 use DigiTickets\TescoClubcard\Messages\AbstractMessage;
+use DigiTickets\TescoClubcard\Messages\Uk\Voucher\RedeemRequest;
+use DigiTickets\TescoClubcard\Messages\Uk\Voucher\UnredeemRequest;
+use DigiTickets\TescoClubcard\Messages\Uk\Voucher\ValidateRequest;
 use DigiTickets\TescoClubcard\Messages\ValidateMessage;
 use DigiTickets\TescoClubcard\Responses\Interfaces\RedeemResponseInterface;
 use DigiTickets\TescoClubcard\Responses\Interfaces\UnredeemResponseInterface;
@@ -11,6 +14,7 @@ use DigiTickets\TescoClubcard\Responses\Uk\RedeemResponse;
 use DigiTickets\TescoClubcard\Responses\Uk\UnredeemResponse;
 use DigiTickets\TescoClubcard\Responses\Uk\ValidateResponse;
 use GuzzleHttp\Client;
+use Omnipay\Common\Message\AbstractRequest;
 
 class UkGateway extends AbstractTescoClubcardGateway
 {
@@ -30,31 +34,30 @@ class UkGateway extends AbstractTescoClubcardGateway
     }
 
     /**
-     * @param string $voucherNumber
-     * @return ValidateResponseInterface
+     * @param array $parameters
+     * @return AbstractRequest
      */
-    public function validate($voucherNumber)
+    public function validate(array $parameters = array())
     {
-        $message = new ValidateMessage($voucherNumber);
-        return new ValidateResponse($this->send($message));
+        return $this->createRequest(ValidateRequest::class, $parameters);
     }
 
     /**
-     * @param string $voucherNumber
-     * @return RedeemResponseInterface
+     * @param array $parameters
+     * @return AbstractRequest
      */
-    public function redeem($voucherNumber)
+    public function redeem(array $parameters = array())
     {
-        return new RedeemResponse(json_decode('{"dummy":"true"}'));
+        return $this->createRequest(RedeemRequest::class, $parameters);
     }
 
     /**
-     * @param string $voucherNumber
-     * @return UnredeemResponseInterface
+     * @param array $parameters
+     * @return AbstractRequest
      */
-    public function unredeem($voucherNumber)
+    public function unredeem(array $parameters = array())
     {
-        return new UnredeemResponse(json_decode('{"dummy":"true"}'));
+        return $this->createRequest(UnredeemRequest::class, $parameters);
     }
 
     /**
