@@ -1,10 +1,11 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\Uk\Responses;
+namespace DigiTickets\TescoClubcard\UkMessages\Voucher;
 
-use DigiTickets\TescoClubcard\Responses\Interfaces\UnredeemResponseInterface;
+use DigiTickets\TescoClubcard\Responses\Interfaces\RedeemResponseInterface;
+use DigiTickets\TescoClubcard\Messages\Uk\Common\AbstractVoucherResponse;
 
-class UnredeemResponse extends AbstractResponse implements UnredeemResponseInterface
+class RedeemResponse extends AbstractVoucherResponse implements RedeemResponseInterface
 {
     /**
      * @return string
@@ -17,7 +18,7 @@ class UnredeemResponse extends AbstractResponse implements UnredeemResponseInter
     /**
      * @return bool
      */
-    public function success()
+    public function isSuccessful()
     {
         return false; // @TODO: Needs finishing
     }

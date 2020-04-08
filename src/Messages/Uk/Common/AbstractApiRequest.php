@@ -17,15 +17,15 @@ abstract class AbstractApiRequest extends AbstractRequest
         return 'https://clubcard.api.tesco.com/v1.0/TokenProcessorService/ManageToken';
     }
 
-//    public function setGateway($value)
-//    {
-//        $this->setParameter('gateway', $value);
-//    }
-//
-//    public function getGateway()
-//    {
-//        return $this->getParameter('gateway');
-//    }
+    public function setGateway($value)
+    {
+        $this->setParameter('gateway', $value);
+    }
+
+    public function getGateway()
+    {
+        return $this->getParameter('gateway');
+    }
 
     public function getVoucherCode()
     {

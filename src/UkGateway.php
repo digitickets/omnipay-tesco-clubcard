@@ -23,6 +23,13 @@ class UkGateway extends AbstractTescoClubcardGateway
         return 'Tesco Clubcard Rewards';
     }
 
+    protected function createRequest($class, array $parameters)
+    {
+        $parameters['gateway'] = $this;
+
+        return parent::createRequest($class, $parameters);
+    }
+
     // @TODO: Need to implement authorize() and refund()
 
     public function purchase(array $parameters = array())

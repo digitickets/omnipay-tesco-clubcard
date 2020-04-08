@@ -1,10 +1,11 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\Uk\Responses;
+namespace DigiTickets\TescoClubcard\Messages\Uk\Voucher;
 
-use DigiTickets\TescoClubcard\Responses\Interfaces\ValidateResponseInterface;
+use DigiTickets\TescoClubcard\Messages\Interfaces\ValidateResponseInterface;
+use DigiTickets\TescoClubcard\Messages\Uk\Common\AbstractVoucherResponse;
 
-class ValidateResponse extends AbstractResponse implements ValidateResponseInterface
+class ValidateResponse extends AbstractVoucherResponse implements ValidateResponseInterface
 {
     /**
      * @return string
