@@ -94,8 +94,8 @@ abstract class AbstractApiRequest extends AbstractRequest
     {
         $headers = array(
             'Accept' => 'application/json',
-            'Content-Type' => 'application/json; charset=utf-8', // ; charset=utf-8
-            'Authorization' => 'appKeyToken=TES0853Test-e0b0df0f-f6a8-4ad6-bef8-ddad2ade89bb&appKey=38ae08dc-e6ff-445b-9cfe-cadc3dd5b345',
+            'Content-Type' => 'application/json; charset=utf-8',
+            'Authorization' => sprintf('appKeyToken=%s&appKey=%s', $this->getAppKeyToken(), $this->getAppKey()),
         );
         try {
             $httpResponse = $this->httpClient->post($this->getUrl(), $headers, $data)->send()->getBody();
@@ -161,6 +161,38 @@ die('Stopping after exception'); // @TODO: We need to handle this properly.
     public function getSupplierCode()
     {
         return $this->getParameter('supplierCode');
+    }
+
+    /**
+     * @param string $appKeyToken
+     */
+    public function setAppKeyToken($appKeyToken)
+    {
+        return $this->setParameter('appKeyToken', $appKeyToken);
+    }
+
+    /**
+     * @return string
+     */
+    public function getAppKeyToken()
+    {
+        return $this->getParameter('appKeyToken');
+    }
+
+    /**
+     * @param string $appKey
+     */
+    public function setAppKey($appKey)
+    {
+        return $this->setParameter('appKey', $appKey);
+    }
+
+    /**
+     * @return string
+     */
+    public function getAppKey()
+    {
+        return $this->getParameter('appKey');
     }
 
 //    /**
