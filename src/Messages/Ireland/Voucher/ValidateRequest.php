@@ -4,9 +4,9 @@ namespace DigiTickets\TescoClubcard\Messages\Ireland\Voucher;
 
 use DigiTickets\TescoClubcard\Messages\AbstractMessage;
 use DigiTickets\TescoClubcard\Messages\Ireland\Common\AbstractApiRequest;
+use DigiTickets\TescoClubcard\Messages\Ireland\Messages\ValidateMessage;
 use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\AbstractResponse;
 use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\ValidateResponse;
-use DigiTickets\TescoClubcard\Messages\ValidateMessage;
 
 class ValidateRequest extends AbstractApiRequest
 {

@@ -6,7 +6,6 @@ use DigiTickets\TescoClubcard\Messages\AbstractMessage;
 use DigiTickets\TescoClubcard\Messages\Uk\Voucher\RedeemRequest;
 use DigiTickets\TescoClubcard\Messages\Uk\Voucher\UnredeemRequest;
 use DigiTickets\TescoClubcard\Messages\Uk\Voucher\ValidateRequest;
-use DigiTickets\TescoClubcard\Messages\ValidateMessage;
 use DigiTickets\TescoClubcard\Responses\Interfaces\RedeemResponseInterface;
 use DigiTickets\TescoClubcard\Responses\Interfaces\UnredeemResponseInterface;
 use DigiTickets\TescoClubcard\Responses\Interfaces\ValidateResponseInterface;

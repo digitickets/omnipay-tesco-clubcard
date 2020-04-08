@@ -142,11 +142,6 @@ die('Stopping after exception'); // @TODO: We need to handle this properly.
         return (new \DateTime())->format('d/m/Y h:m:s');
     }
 
-//    protected function getSource()
-//    {
-//        return 'DigiTickets'; // Not sure if this should be client name, or something else?!
-//    }
-
     /**
      * @param string $supplierCode
      */
@@ -194,30 +189,4 @@ die('Stopping after exception'); // @TODO: We need to handle this properly.
     {
         return $this->getParameter('appKey');
     }
-
-//    /**
-//     * @param string $thirdPartyIdentifier
-//     */
-//    public function setThirdPartyIdentifier($thirdPartyIdentifier)
-//    {
-//        return $this->setParameter('thirdPartyIdentifier', $thirdPartyIdentifier);
-//    }
-//
-//    /**
-//     * @return string
-//     */
-//    public function getThirdPartyIdentifier()
-//    {
-//        return $this->getParameter('thirdPartyIdentifier');
-//    }
-//
-//    protected function getSourceSystem()
-//    {
-//        return $this->getThirdPartyIdentifier();
-//    }
-//
-//    protected function getGuid()
-//    {
-//        return $this->generateGuid();
-//    }
 }
