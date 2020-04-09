@@ -34,10 +34,10 @@ abstract class AbstractVoucherResponse extends AbstractResponse implements Vouch
      */
     private $tokenDetails;
 
-    public function __construct(RequestInterface $request, string $responseJson)
+    public function __construct(RequestInterface $request, $response)
     {
         $this->request = $request;
-        $this->response = json_decode($responseJson);
+        $this->response = $response;
 
         $this->init();
     }

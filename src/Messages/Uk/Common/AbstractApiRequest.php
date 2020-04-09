@@ -99,8 +99,10 @@ abstract class AbstractApiRequest extends AbstractRequest
         );
         try {
             $httpResponse = $this->httpClient->post($this->getUrl(), $headers, $data)->send()->getBody();
+            $httpResponse = json_decode($httpResponse); // Decodes to stdClass.
         } catch (\Exception $e) {
-die('Stopping after exception'); // @TODO: We need to handle this properly.
+            // Create a well-define object that contains the error message.
+            $httpResponse = json_decode(sprintf('{"error":{"message":"%s"}}', $e->getMessage()));
         }
 
         // Send all the information to any listeners.
