@@ -80,4 +80,30 @@ abstract class AbstractVoucherResponse extends AbstractResponse implements Vouch
     {
         return $this->responseIsValid && $this->getTokenAttribute('TokenStatus') == $this->getSuccessStatusCode();
     }
+
+    public function getMessage()
+    {
+        if ($this->responseIsValid) {
+            switch ($this->getTokenAttribute('TokenStatus')) {
+                case self::STATUS_REDEEMED:
+                    return 'Sorry, that voucher has already been redeemed';
+                    break;
+                case self::STATUS_CANCELLED:
+                    return 'Sorry, that voucher has been cancelled';
+                    break;
+                case self::STATUS_EXPIRED:
+                    return 'Sorry, that voucher has expired';
+                    break;
+                case self::STATUS_NOT_FOUND:
+                    return 'Sorry, that voucher was not found';
+                    break;
+                default:
+                    return sprintf('Something went wrong when validating that voucher (%s)', $this->getTokenAttribute('TokenStatus'));
+                    break;
+            }
+        }
+
+        return 'There was a problem communicating with the Tesco server';
+    }
+
 }
