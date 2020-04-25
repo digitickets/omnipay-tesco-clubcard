@@ -31,7 +31,11 @@ class UkGateway extends AbstractTescoClubcardGateway
         return parent::createRequest($class, $parameters);
     }
 
-    // @TODO: Need to implement authorize().
+    public function authorize(array $parameters = array())
+    {
+        return $this->createRequest(AuthorizeRequest::class, $parameters);
+    }
+
 
     public function purchase(array $parameters = array())
     {
