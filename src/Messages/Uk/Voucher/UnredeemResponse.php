@@ -20,7 +20,7 @@ class UnredeemResponse extends AbstractVoucherResponse implements UnredeemRespon
      */
     public function isSuccessful()
     {
-        return false; // @TODO: Needs finishing
+        return false; // @TODO: Needs finishing. I think this method can be deleted.
     }
 
     /**
@@ -28,6 +28,6 @@ class UnredeemResponse extends AbstractVoucherResponse implements UnredeemRespon
      */
     public function getErrorMessage()
     {
-        return 'Has not been implemented yet';
+        return 'Has not been implemented yet'; // @TODO: I think this method can be deleted.
     }
 }

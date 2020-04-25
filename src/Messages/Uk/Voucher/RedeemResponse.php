@@ -12,22 +12,6 @@ class RedeemResponse extends AbstractVoucherResponse implements RedeemResponseIn
      */
     protected function getSuccessStatusCode()
     {
-        return ''; // @TODO: Finish this.
-    }
-
-    /**
-     * @return bool
-     */
-    public function isSuccessful()
-    {
-        return false; // @TODO: Needs finishing
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getErrorMessage()
-    {
-        return 'Has not been implemented yet';
+        return self::STATUS_REDEEMED;
     }
 }

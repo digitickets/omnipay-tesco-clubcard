@@ -3,6 +3,7 @@
 namespace DigiTickets\TescoClubcard;
 
 use DigiTickets\TescoClubcard\Messages\AbstractMessage;
+use DigiTickets\TescoClubcard\Messages\Uk\Omnipay\PurchaseRequest;
 use DigiTickets\TescoClubcard\Messages\Uk\Voucher\RedeemRequest;
 use DigiTickets\TescoClubcard\Messages\Uk\Voucher\UnredeemRequest;
 use DigiTickets\TescoClubcard\Messages\Uk\Voucher\ValidateRequest;
@@ -33,10 +34,7 @@ class UkGateway extends AbstractTescoClubcardGateway
 
     public function purchase(array $parameters = array())
     {
-        return $this->createRequest(
-            '\DigiTickets\TBA\PurchaseRequest',
-            $parameters
-        );
+        return $this->createRequest(PurchaseRequest::class, $parameters);
     }
 
     /**
