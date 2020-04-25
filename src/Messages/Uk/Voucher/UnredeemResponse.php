@@ -2,7 +2,7 @@
 
 namespace DigiTickets\TescoClubcard\Messages\Uk\Voucher;
 
-use DigiTickets\TescoClubcard\Responses\Interfaces\UnredeemResponseInterface;
+use DigiTickets\TescoClubcard\Messages\Interfaces\UnredeemResponseInterface;
 use DigiTickets\TescoClubcard\Messages\Uk\Common\AbstractVoucherResponse;
 
 class UnredeemResponse extends AbstractVoucherResponse implements UnredeemResponseInterface
@@ -12,15 +12,7 @@ class UnredeemResponse extends AbstractVoucherResponse implements UnredeemRespon
      */
     protected function getSuccessStatusCode()
     {
-        return ''; // @TODO: Finish this.
-    }
-
-    /**
-     * @return bool
-     */
-    public function isSuccessful()
-    {
-        return false; // @TODO: Needs finishing. I think this method can be deleted.
+        return self::STATUS_ACTIVE;
     }
 
     /**
