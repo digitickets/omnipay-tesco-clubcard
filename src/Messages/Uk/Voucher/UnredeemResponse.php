@@ -2,10 +2,9 @@
 
 namespace DigiTickets\TescoClubcard\Messages\Uk\Voucher;
 
-use DigiTickets\TescoClubcard\Messages\Interfaces\UnredeemResponseInterface;
 use DigiTickets\TescoClubcard\Messages\Uk\Common\AbstractVoucherResponse;
 
-class UnredeemResponse extends AbstractVoucherResponse implements UnredeemResponseInterface
+class UnredeemResponse extends AbstractVoucherResponse
 {
     /**
      * @return string

@@ -2,10 +2,9 @@
 
 namespace DigiTickets\TescoClubcard\Messages\Uk\Voucher;
 
-use DigiTickets\TescoClubcard\Messages\Interfaces\ValidateResponseInterface;
 use DigiTickets\TescoClubcard\Messages\Uk\Common\AbstractVoucherResponse;
 
-class ValidateResponse extends AbstractVoucherResponse implements ValidateResponseInterface
+class ValidateResponse extends AbstractVoucherResponse
 {
     /**
      * @return string
@@ -22,14 +21,5 @@ class ValidateResponse extends AbstractVoucherResponse implements ValidateRespon
     {
         // @TODO: extract the error message out of the response.
         return 'TBC (validate response)';
-    }
-
-    /**
-     * @return float
-     */
-    public function getValue()
-    {
-        // @TODO: Finish this.
-        return -999;
     }
 }
