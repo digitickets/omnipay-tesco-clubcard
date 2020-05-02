@@ -34,7 +34,6 @@ class UkGateway extends AbstractTescoClubcardGateway
         return $this->createRequest(AuthorizeRequest::class, $parameters);
     }
 
-
     public function purchase(array $parameters = array())
     {
         return $this->createRequest(PurchaseRequest::class, $parameters);
