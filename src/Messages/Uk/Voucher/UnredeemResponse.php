@@ -13,12 +13,4 @@ class UnredeemResponse extends AbstractVoucherResponse
     {
         return self::STATUS_ACTIVE;
     }
-
-    /**
-     * @return string|null
-     */
-    public function getErrorMessage()
-    {
-        return 'Has not been implemented yet'; // @TODO: I think this method can be deleted.
-    }
 }

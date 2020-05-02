@@ -14,11 +14,11 @@ abstract class AbstractVoucherResponse extends AbstractResponse implements Vouch
 {
     const RESPONSE_CODE_SUCCESS = '0';
 
-    const STATUS_REDEEMED = 'Redeemed';
-    const STATUS_CANCELLED = 'Cancelled';
     const STATUS_ACTIVE = 'Active';
+    const STATUS_CANCELLED = 'Cancelled';
     const STATUS_EXPIRED = 'Expired';
     const STATUS_NOT_FOUND = 'NotFound';
+    const STATUS_REDEEMED = 'Redeemed';
 
     /**
      * @var \stdClass
@@ -44,6 +44,11 @@ abstract class AbstractVoucherResponse extends AbstractResponse implements Vouch
      * @var string
      */
     private $message;
+
+    /**
+     * @return string
+     */
+    abstract protected function getSuccessStatusCode();
 
     public function __construct(RequestInterface $request, $response)
     {
@@ -100,11 +105,6 @@ abstract class AbstractVoucherResponse extends AbstractResponse implements Vouch
 
         return null;
     }
-
-    /**
-     * @return string
-     */
-    abstract protected function getSuccessStatusCode();
 
     /**
      * @return bool

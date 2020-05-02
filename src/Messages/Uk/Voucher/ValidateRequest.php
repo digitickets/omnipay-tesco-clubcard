@@ -4,6 +4,7 @@ namespace DigiTickets\TescoClubcard\Messages\Uk\Voucher;
 
 use DigiTickets\TescoClubcard\Messages\AbstractMessage;
 use DigiTickets\TescoClubcard\Messages\Uk\Common\AbstractUkApiRequest;
+use DigiTickets\TescoClubcard\Messages\Uk\Common\AbstractVoucherResponse;
 use DigiTickets\TescoClubcard\Messages\Uk\Messages\ValidateMessage;
 
 class ValidateRequest extends AbstractUkApiRequest
@@ -19,7 +20,7 @@ class ValidateRequest extends AbstractUkApiRequest
     /**
      * @param RequestInterface $request
      * @param mixed $response
-     * @return AbstractResponse
+     * @return AbstractVoucherResponse
      */
     protected function buildResponse($request, $response)
     {

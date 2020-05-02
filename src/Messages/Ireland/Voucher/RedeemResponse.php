@@ -13,13 +13,4 @@ class RedeemResponse extends AbstractVoucherResponse
     {
         return self::STATUS_REDEEMED;
     }
-
-    /**
-     * @return string|null
-     */
-    public function getErrorMessage()
-    {
-        // @TODO: extract the error message out of the response.
-        return 'TBC (redeem response)';
-    }
 }
