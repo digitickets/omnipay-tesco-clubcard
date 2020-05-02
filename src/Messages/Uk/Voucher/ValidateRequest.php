@@ -3,10 +3,10 @@
 namespace DigiTickets\TescoClubcard\Messages\Uk\Voucher;
 
 use DigiTickets\TescoClubcard\Messages\AbstractMessage;
-use DigiTickets\TescoClubcard\Messages\Uk\Common\AbstractApiRequest;
+use DigiTickets\TescoClubcard\Messages\Uk\Common\AbstractUkApiRequest;
 use DigiTickets\TescoClubcard\Messages\Uk\Messages\ValidateMessage;
 
-class ValidateRequest extends AbstractApiRequest
+class ValidateRequest extends AbstractUkApiRequest
 {
     /**
      * @return AbstractMessage

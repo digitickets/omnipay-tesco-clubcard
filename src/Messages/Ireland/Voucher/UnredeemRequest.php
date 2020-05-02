@@ -3,12 +3,12 @@
 namespace DigiTickets\TescoClubcard\Messages\Ireland\Voucher;
 
 use DigiTickets\TescoClubcard\Messages\AbstractMessage;
-use DigiTickets\TescoClubcard\Messages\Ireland\Common\AbstractApiRequest;
+use DigiTickets\TescoClubcard\Messages\Ireland\Common\AbstractIrelandApiRequest;
 use DigiTickets\TescoClubcard\Messages\Ireland\Messages\UnredeemMessage;
 use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\AbstractResponse;
 use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\UnredeemResponse;
 
-class UnredeemRequest extends AbstractApiRequest
+class UnredeemRequest extends AbstractIrelandApiRequest
 {
     /**
      * @return AbstractMessage
