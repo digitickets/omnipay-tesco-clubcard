@@ -3,11 +3,11 @@
 namespace DigiTickets\TescoClubcard\Messages\Ireland\Common;
 
 use DigiTickets\TescoClubcard\Messages\AbstractMessage;
-use Omnipay\Common\Message\AbstractRequest;
+use DigiTickets\TescoClubcard\Messages\Common\AbstractApiRequest;
 use SoapClient;
 use SoapVar;
 
-abstract class AbstractApiRequest extends AbstractRequest
+abstract class AbstractIrelandApiRequest extends AbstractApiRequest
 {
     /**
      * @return string
@@ -16,45 +16,6 @@ abstract class AbstractApiRequest extends AbstractRequest
     {
         return 'https://tfoag01.tescofreetime.com/TokenAuthorisationWebService/TokenAuthorise.asmx';
     }
-
-    public function setGateway($value)
-    {
-        $this->setParameter('gateway', $value);
-    }
-
-    public function getGateway()
-    {
-        return $this->getParameter('gateway');
-    }
-
-    public function getVoucherCode()
-    {
-        return $this->getParameter('voucherCode');
-    }
-
-    public function setVoucherCode($voucherCode)
-    {
-        return $this->setParameter('voucherCode', $voucherCode);
-    }
-
-    /**
-     * @param mixed $data
-     * @return AbstractMessage
-     */
-    abstract protected function buildMessage();
-
-    /**
-     * @param RequestInterface $request
-     * @param mixed $response
-     * @return AbstractRemoteResponse
-     */
-    abstract protected function buildResponse($request, $response);
-
-    /**
-     * Method to return the action for the listener.
-     * @return string
-     */
-    abstract protected function getListenerAction(): string;
 
     /**
      * @return mixed
@@ -125,31 +86,6 @@ EOT;
         return $this->response = $this->buildResponse($this, $responseXml);
     }
 
-    protected function generateGuid()
-    {
-        // Found this code online. Is there an alternative already in the system? Should this be made global?
-        $charId = strtoupper(md5(uniqid(rand(), true)));
-        $hyphen = chr(45); // "-"
-        $uuid =
-            substr($charId, 0, 8).$hyphen.
-            substr($charId, 8, 4).$hyphen.
-            substr($charId, 12, 4).$hyphen.
-            substr($charId, 16, 4).$hyphen.
-            substr($charId, 20, 12);
-
-        return $uuid;
-    }
-
-    protected function generateTransactionId()
-    {
-        return $this->generateGuid();
-    }
-
-    protected function generateRequestId()
-    {
-        return $this->generateGuid();
-    }
-
     protected function getTransactionDateTime()
     {
         // Eg 2016-01-12T13:45:45.2790586+00:00
@@ -159,22 +95,6 @@ EOT;
     protected function getSource()
     {
         return 'DigiTickets'; // Not sure if this should be client name, or something else?!
-    }
-
-    /**
-     * @param string $supplierCode
-     */
-    public function setSupplierCode($supplierCode)
-    {
-        return $this->setParameter('supplierCode', $supplierCode);
-    }
-
-    /**
-     * @return string
-     */
-    public function getSupplierCode()
-    {
-        return $this->getParameter('supplierCode');
     }
 
     /**

@@ -3,9 +3,6 @@
 namespace DigiTickets\TescoClubcard;
 
 use DigiTickets\OmnipayAbstractVoucher\AbstractVoucherGateway;
-use DigiTickets\TescoClubcard\Messages\Interfaces\RedeemResponseInterface;
-use DigiTickets\TescoClubcard\Messages\Interfaces\UnredeemResponseInterface;
-use DigiTickets\TescoClubcard\Messages\Interfaces\ValidateResponseInterface;
 use Omnipay\Common\AbstractGateway;
 
 /**

@@ -2,15 +2,8 @@
 
 namespace DigiTickets\TescoClubcard\Messages\Ireland\Omnipay;
 
-use DigiTickets\TescoClubcard\Messages\Ireland\Common\AbstractVoucherResponse;
+use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\RedeemResponse;
 
-class PurchaseResponse extends AbstractVoucherResponse
+class PurchaseResponse extends RedeemResponse
 {
-    /**
-     * @return string
-     */
-    protected function getSuccessStatusCode()
-    {
-        return self::STATUS_REDEEMED;
-    }
 }

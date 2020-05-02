@@ -2,13 +2,12 @@
 
 namespace DigiTickets\TescoClubcard\Messages\Ireland\Omnipay;
 
-use DigiTickets\TescoClubcard\Messages\Interfaces\RefundResponseInterface;
 use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\UnredeemRequest;
 use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\UnredeemResponse;
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RequestInterface;
 
-class RefundResponse extends AbstractResponse implements RefundResponseInterface
+class RefundResponse extends AbstractResponse
 {
     /**
      * @var UnredeemRequest

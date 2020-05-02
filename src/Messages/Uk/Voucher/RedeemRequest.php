@@ -1,14 +1,14 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\Messages\Ireland\Voucher;
+namespace DigiTickets\TescoClubcard\Messages\Uk\Voucher;
 
 use DigiTickets\TescoClubcard\Messages\AbstractMessage;
-use DigiTickets\TescoClubcard\Messages\Ireland\Common\AbstractIrelandApiRequest;
-use DigiTickets\TescoClubcard\Messages\Ireland\Messages\RedeemMessage;
-use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\AbstractResponse;
-use DigiTickets\TescoClubcard\Messages\Ireland\Voucher\RedeemResponse;
+use DigiTickets\TescoClubcard\Messages\Uk\Common\AbstractUkApiRequest;
+use DigiTickets\TescoClubcard\Messages\Uk\Messages\RedeemMessage;
+use DigiTickets\TescoClubcard\Messages\Uk\Voucher\AbstractResponse;
+use DigiTickets\TescoClubcard\Messages\Uk\Voucher\RedeemResponse;
 
-class RedeemRequest extends AbstractIrelandApiRequest
+class RedeemRequest extends AbstractUkApiRequest
 {
     /**
      * @return AbstractMessage

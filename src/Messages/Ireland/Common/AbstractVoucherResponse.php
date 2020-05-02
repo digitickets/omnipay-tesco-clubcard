@@ -18,18 +18,14 @@ abstract class AbstractVoucherResponse extends AbstractResponse implements Vouch
     const RESPONSE_CODE_STATUS_CHANGE_FAIL = 'StatusChangeFail';
     const RESPONSE_CODE_ADD_REFERENCE_FAIL = 'AddReferenceFail';
 
-    const STATUS_NOT_FOUND = 'NotFound';
     const STATUS_ACTIVE = 'Active';
-    const STATUS_RESERVED = 'Reserved';
-    const STATUS_REDEEMED = 'Redeemed';
     const STATUS_CANCELLED = 'Cancelled';
     const STATUS_EXPIRED = 'Expired';
     const STATUS_INVOICED = 'Invoiced';
+    const STATUS_NOT_FOUND = 'NotFound';
+    const STATUS_REDEEMED = 'Redeemed';
+    const STATUS_RESERVED = 'Reserved';
 
-    /**
-     * @var RequestInterface
-     */
-    protected $request;
     /**
      * @var bool
      */
@@ -52,6 +48,13 @@ abstract class AbstractVoucherResponse extends AbstractResponse implements Vouch
      * @var string|null
      */
     private $alphaNumericID;
+
+    /**
+     * Returns the string that means "success" for the specific request.
+     *
+     * @return string
+     */
+    abstract protected function getSuccessStatusCode();
 
     public function __construct(RequestInterface $request, \SimpleXMLElement $response)
     {
@@ -108,13 +111,6 @@ abstract class AbstractVoucherResponse extends AbstractResponse implements Vouch
 
         return null;
     }
-
-    /**
-     * Returns the string that means "success" for the specific request.
-     *
-     * @return string
-     */
-    abstract protected function getSuccessStatusCode();
 
     public function isSuccessful(): bool
     {

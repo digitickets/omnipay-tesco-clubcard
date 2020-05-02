@@ -1,8 +1,8 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\Messages\Ireland\Voucher;
+namespace DigiTickets\TescoClubcard\UkMessages\Voucher;
 
-use DigiTickets\TescoClubcard\Messages\Ireland\Common\AbstractVoucherResponse;
+use DigiTickets\TescoClubcard\Messages\Uk\Common\AbstractVoucherResponse;
 
 class RedeemResponse extends AbstractVoucherResponse
 {
