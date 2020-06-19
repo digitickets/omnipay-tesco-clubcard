@@ -59,6 +59,17 @@ abstract class AbstractUkApiRequest extends AbstractApiRequest
             'Authorization' => sprintf('appKeyToken=%s&appKey=%s', $this->getAppKeyToken(), $this->getAppKey()),
         );
         try {
+            // @TODO: All this is experimental...
+            $sslVerification = $this->getGateway()->getSslVerification();
+            if ($sslVerification) {
+                $sslVerification = ($sslVerification === 'true' ? true : ($sslVerification === 'false' ? false : $sslVerification));
+                $this->httpClient->setSslVerification($sslVerification);
+            }
+            $sslCertificateAuthority = $this->getGateway()->getSslCertificateAuthority();
+            if ($sslCertificateAuthority) {
+                $this->httpClient->getConfig()->set('ssl.certificate_authority', $sslCertificateAuthority);
+            }
+
             $httpResponse = $this->httpClient->post($this->getUrl(), $headers, $data)->send()->getBody();
             $httpResponse = json_decode($httpResponse); // Decodes to stdClass.
         } catch (\Exception $e) {

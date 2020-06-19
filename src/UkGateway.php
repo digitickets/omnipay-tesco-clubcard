@@ -2,7 +2,6 @@
 
 namespace DigiTickets\TescoClubcard;
 
-use DigiTickets\TescoClubcard\Messages\AbstractMessage;
 use DigiTickets\TescoClubcard\Messages\Uk\Omnipay\AuthorizeRequest;
 use DigiTickets\TescoClubcard\Messages\Uk\Omnipay\PurchaseRequest;
 use DigiTickets\TescoClubcard\Messages\Uk\Omnipay\RefundRequest;
@@ -12,11 +11,28 @@ use DigiTickets\TescoClubcard\Messages\Uk\Voucher\ValidateRequest;
 use DigiTickets\TescoClubcard\Responses\Uk\RedeemResponse;
 use DigiTickets\TescoClubcard\Responses\Uk\UnredeemResponse;
 use DigiTickets\TescoClubcard\Responses\Uk\ValidateResponse;
-use GuzzleHttp\Client;
 use Omnipay\Common\Message\AbstractRequest;
 
 class UkGateway extends AbstractTescoClubcardGateway
 {
+    // @TODO: These setters and getters are temporary for now...
+    public function setSslVerification($value)
+    {
+        $this->setParameter('sslVerification', $value);
+    }
+    public function getSslVerification()
+    {
+        return $this->getParameter('sslVerification');
+    }
+    public function setSslCertificateAuthority($value)
+    {
+        $this->setParameter('sslCertificateAuthority', $value);
+    }
+    public function getSslCertificateAuthority()
+    {
+        return $this->getParameter('sslCertificateAuthority');
+    }
+
     public function getName()
     {
         return 'Tesco Clubcard Rewards';
