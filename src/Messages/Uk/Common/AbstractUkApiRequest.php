@@ -4,8 +4,6 @@ namespace DigiTickets\TescoClubcard\Messages\Uk\Common;
 
 use DigiTickets\TescoClubcard\Messages\AbstractMessage;
 use DigiTickets\TescoClubcard\Messages\Common\AbstractApiRequest;
-use SoapClient;
-use SoapVar;
 
 abstract class AbstractUkApiRequest extends AbstractApiRequest
 {
@@ -59,15 +57,16 @@ abstract class AbstractUkApiRequest extends AbstractApiRequest
             'Authorization' => sprintf('appKeyToken=%s&appKey=%s', $this->getAppKeyToken(), $this->getAppKey()),
         );
         try {
-            // @TODO: All this is experimental...
+            // Allow the SSL verification to be overridden. Do NOT supply "false" as the parameter value, except when
+            // you're testing this, because it is insecure.
             $sslVerification = $this->getGateway()->getSslVerification();
             if ($sslVerification) {
-                $sslVerification = ($sslVerification === 'true' ? true : ($sslVerification === 'false' ? false : $sslVerification));
+                $sslVerification = (
+                    $sslVerification === 'true' ? true : (
+                        $sslVerification === 'false' ? false : $sslVerification
+                    )
+                );
                 $this->httpClient->setSslVerification($sslVerification);
-            }
-            $sslCertificateAuthority = $this->getGateway()->getSslCertificateAuthority();
-            if ($sslCertificateAuthority) {
-                $this->httpClient->getConfig()->set('ssl.certificate_authority', $sslCertificateAuthority);
             }
 
             $httpResponse = $this->httpClient->post($this->getUrl(), $headers, $data)->send()->getBody();

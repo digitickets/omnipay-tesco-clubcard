@@ -44,6 +44,12 @@ Use the voucher-type requests when you're treating the vouchers as vouchers; use
 For general Omnipay usage instructions, please see the main [Omnipay](https://github.com/omnipay/omnipay)
 repository.
 
+### UK SSL Verification
+
+The CA bundle that comes with the HTTP Client in this driver is very old, and is not aware of the certificate that Tesco's UK API uses.
+You therefore have to supply an alternative CA bundle, via the `sslVerification` parameter.
+You can pass in `false`, which basically switches off verification but this is obviously **insecure**, so do not do it, except maybe while testing.
+
 ## Support
 
 If you are having general issues with Omnipay, we suggest posting on

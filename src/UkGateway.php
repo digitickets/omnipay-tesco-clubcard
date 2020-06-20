@@ -15,24 +15,6 @@ use Omnipay\Common\Message\AbstractRequest;
 
 class UkGateway extends AbstractTescoClubcardGateway
 {
-    // @TODO: These setters and getters are temporary for now...
-    public function setSslVerification($value)
-    {
-        $this->setParameter('sslVerification', $value);
-    }
-    public function getSslVerification()
-    {
-        return $this->getParameter('sslVerification');
-    }
-    public function setSslCertificateAuthority($value)
-    {
-        $this->setParameter('sslCertificateAuthority', $value);
-    }
-    public function getSslCertificateAuthority()
-    {
-        return $this->getParameter('sslCertificateAuthority');
-    }
-
     public function getName()
     {
         return 'Tesco Clubcard Rewards';
@@ -98,5 +80,21 @@ class UkGateway extends AbstractTescoClubcardGateway
     public function getAuthKey()
     {
         return 'appKeyToken='.$this->getAppKeyToken().'&appKey='.$this->getAppKey();
+    }
+
+    /**
+     * Because the http client is very old, it does not have the CA for Tesco's current certificate, so you have to pass
+     * in the path of an alternative CA bundle.
+     *
+     * @param $value
+     */
+    public function setSslVerification($value)
+    {
+        $this->setParameter('sslVerification', $value);
+    }
+
+    public function getSslVerification()
+    {
+        return $this->getParameter('sslVerification');
     }
 }
