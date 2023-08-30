@@ -1,6 +1,6 @@
 <?php
 
-namespace DigiTickets\TescoClubcard\UkMessages\Voucher;
+namespace DigiTickets\TescoClubcard\Messages\Uk\Voucher;
 
 use DigiTickets\TescoClubcard\Messages\Uk\Common\AbstractVoucherResponse;
 
