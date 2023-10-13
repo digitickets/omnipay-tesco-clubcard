@@ -2,8 +2,9 @@
 
 namespace DigiTickets\TescoClubcard\Messages\Uk\Common;
 
+use DateTime;
+use DateTimeZone;
 use DigiTickets\OmnipayAbstractVoucher\VoucherResponseInterface;
-use DigiTickets\ValueObjects\DateTime;
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RequestInterface;
 
@@ -74,7 +75,11 @@ abstract class AbstractVoucherResponse extends AbstractResponse implements Vouch
                 // Check the expiry date.
                 $expiryDate = $this->getTokenAttribute('TokenExpiryDate');
                 if ($expiryDate) {
-                    $expiryDateTime = DateTime::parse($expiryDate, false, 'd/m/Y H:i:s');
+                    $expiryDateTime = DateTime::createFromFormat(
+                        'd/m/Y H:i:s',
+                        $expiryDate,
+                        new DateTimeZone('UTC')
+                    );
                     if ($expiryDateTime->getTimestamp() < time()) {
                         $this->message = 'Voucher expired at '.$expiryDateTime->format('Y-m-d H:i:s');
                     } else {
@@ -97,9 +102,9 @@ abstract class AbstractVoucherResponse extends AbstractResponse implements Vouch
      * @param string $attribute
      * @return null
      */
-    private function getTokenAttribute($attribute)
+    public function getTokenAttribute($attribute)
     {
-        if (property_exists($this->tokenDetails, $attribute)) {
+        if ($this->tokenDetails && property_exists($this->tokenDetails, $attribute)) {
             return $this->tokenDetails->$attribute;
         }
 
@@ -117,6 +122,14 @@ abstract class AbstractVoucherResponse extends AbstractResponse implements Vouch
     public function getMessage()
     {
         return $this->message;
+    }
+
+    public function getMessageDetails(): array
+    {
+        return [
+            'TokenStatus' => $this->getTokenAttribute('TokenStatus'),
+            'TokenValue' => $this->getTokenAttribute('TokenValue'),
+        ];
     }
 
     public function getTransactionReference()
