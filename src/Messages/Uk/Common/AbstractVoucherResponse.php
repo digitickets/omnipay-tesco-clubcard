@@ -126,9 +126,10 @@ abstract class AbstractVoucherResponse extends AbstractResponse implements Vouch
 
     public function getMessageDetails(): array
     {
+        $tokenValue = $this->getTokenAttribute('TokenValue');
         return [
             'TokenStatus' => $this->getTokenAttribute('TokenStatus'),
-            'TokenValue' => $this->getTokenAttribute('TokenValue'),
+            'TokenValue' => $tokenValue !== null ? floatval($tokenValue) : null,
         ];
     }
 
