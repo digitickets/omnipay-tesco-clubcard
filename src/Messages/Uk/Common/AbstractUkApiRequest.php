@@ -73,7 +73,7 @@ abstract class AbstractUkApiRequest extends AbstractApiRequest
             $httpResponse = json_decode($httpResponse); // Decodes to stdClass.
         } catch (\Exception $e) {
             // Create a well-define object that contains the error message.
-            $httpResponse = json_decode(sprintf('{"error":{"message":"%s"}}', $e->getMessage()));
+            $httpResponse = (object) ['error' => ['message' => $e->getMessage()]];
         }
 
         // Send all the information to any listeners.
