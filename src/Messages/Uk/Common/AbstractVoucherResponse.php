@@ -64,6 +64,7 @@ abstract class AbstractVoucherResponse extends AbstractResponse implements Vouch
         $this->responseIsValid = false;
         $this->message = 'An error occured when communicating with Tesco';
         $this->tokenCode = null;
+        $this->data = json_encode($this->response);
         if (property_exists($this->response, 'TransactionResponseCode') &&
             $this->response->TransactionResponseCode == self::RESPONSE_CODE_SUCCESS) {
             if (property_exists($this->response, 'TokenDetailsList') &&
