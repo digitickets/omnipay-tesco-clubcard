@@ -12,7 +12,7 @@ abstract class AbstractUkApiRequest extends AbstractApiRequest
      */
     public function getUrl()
     {
-        return 'https://clubcard.api.tesco.com/v1.0/TokenProcessorService/ManageToken';
+        return 'https://api.prod.retail.tesco.com/clubcardpartners-system/v1/tokenprocessorservice/managetoken';
     }
 
     /**
